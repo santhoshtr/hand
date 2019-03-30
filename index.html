@@ -1,22 +1,28 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-	<meta charset="utf-8">
+	<head>
+		<meta charset="utf-8">
+		<title>Handwriting</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="dist/mlhand.js"></script>
+		<script>
+			window.addEventListener('load', () => {
+				const hw = new Mlhand({
+					canvas: document.getElementById('pad'),
+					simplifiedCanvas: document.getElementById('simplified')
+				});
+			});
+		</script>
+	</head>
 
-	<title>Handwriting</title>
-	<link rel="stylesheet" href="css/style.css">
-	<!-- load require -->
-	<script data-main="main" src="lib/require.js"></script>
-</head>
-
-<body>
-	<div id="container">
-		<canvas id="pad" width="500" height="500"></canvas>
-		<canvas id="simplified" width="500" height="500"></canvas>
-		<span id="result"></div>
-	</div>
-	<div id="console"></div>
-</body>
+	<body>
+		<div id="container">
+			<canvas id="pad" width="500" height="500"></canvas>
+			<canvas id="simplified" width="500" height="500"></canvas>
+			<span id="result"></div>
+		</div>
+		<div id="console"></div>
+	</body>
 
 </html>
