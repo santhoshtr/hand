@@ -1,6 +1,7 @@
 
 body{
     overflow: hidden;
+    height: 100vh;
 }
 
 .container {
@@ -9,7 +10,7 @@ body{
     align-items: stretch;
 }
 
-canvas {
+#pad {
     border: 1px dotted #565656;
     background-color: ivory;
     margin: 0;
@@ -23,13 +24,4 @@ canvas {
     width: 100%;
     border: 0;
     height: 200px;
-}
-
-#console {
-    border: 1px solid #999;
-    min-height: 200px;
-    font-family: monospace;
-    overflow-y: scroll;
-    max-height: 200px;
-    background-color: #fff;
 }
