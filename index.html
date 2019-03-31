@@ -1,22 +1,35 @@
 <!doctype html>
 <html lang="en">
+
 	<head>
 		<meta charset="utf-8">
-		<meta name="theme-color" content="#2B3A42"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<meta name="theme-color" content="#2B3A42" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Handwriting</title>
 		<link rel="stylesheet" href="css/style.css">
 		<script src="dist/mlhand.js"></script>
 		<script>
 			window.addEventListener('load', () => {
-				let canvas=document.getElementById('pad')
-				canvas.width= document.body.clientWidth
-				canvas.height= document.body.clientHeight*0.5;
+				let canvas = document.getElementById('pad')
+				let candidates = document.getElementsByClassName('candidates')[0]
+				canvas.width = document.body.clientWidth
+				canvas.height = document.body.clientHeight * 0.5;
 				const hw = new Mlhand({
-					canvas:canvas,
-					onResult: (result) => {
-						if (result) {
-							document.getElementById('result').value += result;
+					canvas: canvas,
+					threshold: 0.85,
+					onResult: (results) => {
+						if (results.length) {
+							candidates.innerHTML = ''
+							document.getElementById('result').value += results[0].pattern;
+							console.log("Match: " + JSON.stringify(results[0]))
+							for (let i = 1; i < results.length; i++) {
+								let button = document.createElement('button')
+								button.innerText = results[i].pattern;
+								button.title = results[i].score;
+								candidates.appendChild(button);
+							}
+						} else {
+							candidates.innerHTML = 'No match'
 						}
 					},
 					debug: true
@@ -24,11 +37,18 @@
 			});
 		</script>
 	</head>
+
 	<body>
+		<nav>
+			<h1>Malayalam Handwriting recognition</h1>
+		</nav>
 		<div class="container">
+			<p>ഇവിടെയെഴുതുക:</p>
+			<hr />
 			<canvas id="pad"></canvas>
+			<div class="candidates"></div>
+			<textarea id="result"></textarea>
 		</div>
-		<textarea id="result"></textarea>
 	</body>
 
 </html>

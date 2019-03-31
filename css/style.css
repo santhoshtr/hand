@@ -1,12 +1,12 @@
-
-body{
+body {
     overflow: hidden;
     height: 100vh;
+    font-family: "Manjari", "Rachana", sans-serif;
 }
 
 .container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
 }
 
@@ -18,10 +18,29 @@ body{
 }
 
 #result {
+    font-family: "Manjari", "Rachana", sans-serif;
     font-size: 2em;
     background-color: #fff;
     color: steelblue;
     width: 100%;
     border: 0;
     height: 200px;
+}
+
+.candidates {
+    padding: 10px;
+}
+
+.candidates button {
+    font-family: "Manjari", "Rachana", sans-serif;
+    margin: 0 10px;
+    font-size: 1.4em;
+    color: steelblue;
+    background-color: #fff;
+    border: 1px solid gray;
+    border-radius: 4px;
+    min-width: 2em;
+    min-height: 2em;
+    cursor: pointer;
+
 }

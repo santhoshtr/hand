@@ -8,6 +8,7 @@ export default class Mlhand {
   constructor (options) {
     this.canvasElement = options.canvas
     this.onResult = options.onResult
+    this.threshold = options.threshold || 0.85
     this.events = new Events()
     this.pad = null
     this.debug = options.debug
@@ -41,10 +42,9 @@ export default class Mlhand {
       console.debug(JSON.stringify(translatedPoints))
     }
     this.pad.clear()
-    let match = new Match(PATTERNDATA)
+    let match = new Match(PATTERNDATA, this.threshold)
     let result = match.run(data.points)
-    console.debug(JSON.stringify(result))
-    this.onResult(result.pattern)
+    this.onResult(result)
   }
 
   translate (points, box) {

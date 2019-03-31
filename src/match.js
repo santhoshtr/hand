@@ -1,32 +1,26 @@
 import { shapeSimilarity } from 'curve-matcher'
 
 export default class Match {
-  constructor (data) {
+  constructor (data, threshold) {
     this.data = data
-    this.threshold = 0.85
+    this.threshold = threshold
   }
 
   run (stroke) {
-    let result = {
-      score: 0
-    }
+    let candiates = []
     if (!stroke || !stroke.length) return
     let keys = Object.keys(this.data)
     for (let i = 0; i < keys.length; i++) {
-      // console.debug('Matching ' + keys[i])
       let score = this.match(stroke, this.data[keys[i]].points)
-      if (score >= this.threshold && score >= result.score) {
+      if (score >= this.threshold) {
         let pattern = keys[i]
-        result = {
+        candiates.push({
           pattern: pattern,
           score: score
-        }
-        if (score === 1) {
-          break
-        }
+        })
       }
     }
-    return result
+    return candiates.sort((a, b) => parseFloat(b.score) - parseFloat(a.score))
   }
 
   match (path, candidatePath) {
