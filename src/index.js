@@ -33,7 +33,7 @@ export default class Mlhand {
 
   onPenUp (data) {
     let simplifiedPoints, translatedPoints
-    if (!data.points.length) return
+    if (data.points.length <= 1) return
     if (this.debug) {
       simplifiedPoints = simplify(data.points, 1, true)
       console.debug('Simplifed ' + data.points.length + ' points to ' + simplifiedPoints.length + ' points.')

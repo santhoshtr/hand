@@ -4,6 +4,11 @@ body {
     font-family: "Manjari", "Rachana", sans-serif;
 }
 
+h1 {
+    font-size: 1em;
+    margin: 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -33,14 +38,14 @@ body {
 
 .candidates button {
     font-family: "Manjari", "Rachana", sans-serif;
-    margin: 0 10px;
+    margin: 0 5px;
     font-size: 1.4em;
     color: steelblue;
     background-color: #fff;
     border: 1px solid gray;
     border-radius: 4px;
-    min-width: 2em;
-    min-height: 2em;
+    min-width: 1.5em;
+    min-height: 1.5em;
     cursor: pointer;
 
 }

@@ -18,7 +18,7 @@
 					canvas: canvas,
 					threshold: 0.85,
 					onResult: (results) => {
-						if (results.length) {
+						if (results && results.length) {
 							candidates.innerHTML = ''
 							document.getElementById('result').value += results[0].pattern;
 							console.log("Match: " + JSON.stringify(results[0]))
@@ -44,7 +44,6 @@
 		</nav>
 		<div class="container">
 			<p>ഇവിടെയെഴുതുക:</p>
-			<hr />
 			<canvas id="pad"></canvas>
 			<div class="candidates"></div>
 			<textarea id="result"></textarea>

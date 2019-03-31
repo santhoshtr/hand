@@ -8,7 +8,7 @@ export default class Match {
 
   run (stroke) {
     let candiates = []
-    if (!stroke || !stroke.length) return
+    if (!stroke || stroke.length <= 1) return
     let keys = Object.keys(this.data)
     for (let i = 0; i < keys.length; i++) {
       let score = this.match(stroke, this.data[keys[i]].points)
