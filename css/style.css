@@ -1,20 +1,35 @@
+
+body{
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
 canvas {
-	border: 1px dotted #565656;
+    border: 1px dotted #565656;
+    background-color: ivory;
+    margin: 0;
+    padding: 0;
 }
 
 #result {
-	padding: 50px;
-    font-size: 4em;
-	color: steelblue;
-    position: absolute;
-    right: -100;
-    top: 100;
+    font-size: 2em;
+    background-color: #fff;
+    color: steelblue;
+    width: 100%;
+    border: 0;
+    height: 200px;
 }
 
 #console {
-	border: 1px solid #999;
-	min-height: 200px;
-	font-family: monospace;
+    border: 1px solid #999;
+    min-height: 200px;
+    font-family: monospace;
     overflow-y: scroll;
     max-height: 200px;
+    background-color: #fff;
 }

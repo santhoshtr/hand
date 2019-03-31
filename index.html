@@ -10,19 +10,23 @@
 			window.addEventListener('load', () => {
 				const hw = new Mlhand({
 					canvas: document.getElementById('pad'),
-					simplifiedCanvas: document.getElementById('simplified')
+					simplifiedCanvas: document.getElementById('simplified'),
+					onResult: (result) => {
+						if (result) {
+							document.getElementById('result').value += result;
+						}
+					}
 				});
 			});
 		</script>
 	</head>
 
 	<body>
-		<div id="container">
+		<div class="container">
 			<canvas id="pad" width="500" height="500"></canvas>
-			<canvas id="simplified" width="500" height="500"></canvas>
-			<span id="result"></div>
+			<!-- <canvas id="simplified" width="500" height="500"></canvas> -->
 		</div>
-		<div id="console"></div>
+		<textarea id="result"></textarea>
 	</body>
 
 </html>

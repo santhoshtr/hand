@@ -1,5 +1,6 @@
 import log from './log'
 import levenshteinDistance from './levenshteinDistance'
+import { shapeSimilarity } from 'curve-matcher'
 
 export default class Match {
   constructor (data) {
@@ -8,19 +9,16 @@ export default class Match {
   }
 
   run (stroke) {
-    var i
-    var keys
-    var score
-    var result = {
+    let result = {
       score: 0
     }
-    var pattern
-    keys = Object.keys(this.data)
-    for (i = 0; i < keys.length; i++) {
-      log('Matching ' + keys[i])
-      score = this.match(stroke, this.data[keys[i]].points)
+    if (!stroke || !stroke.length) return
+    let keys = Object.keys(this.data)
+    for (let i = 0; i < keys.length; i++) {
+      // log('Matching ' + keys[i])
+      let score = this.match(stroke, this.data[keys[i]].points)
       if (score >= this.threshold && score >= result.score) {
-        pattern = keys[i]
+        let pattern = keys[i]
         result = {
           pattern: pattern,
           score: score
@@ -29,12 +27,15 @@ export default class Match {
           break
         }
       }
-      pattern = undefined
     }
     return result
   }
 
   match (path, candidatePath) {
+    return shapeSimilarity(path, candidatePath)
+  }
+
+  match2 (path, candidatePath) {
     let penalty = 0
     let lengthDiff
     let ld = levenshteinDistance(path, candidatePath, (a, b) => this.distance(a, b) <= 100)

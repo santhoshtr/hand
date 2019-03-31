@@ -83,6 +83,7 @@ export default class Pad {
   setPoints (points) {
     this.points = points
   }
+
   getBoundingBox () {
     var minX = this.canvas.width
     var minY = this.canvas.height
