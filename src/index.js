@@ -1,6 +1,5 @@
 import Pad from './pad'
 import simplify from 'simplify-js'
-import log from './log'
 import Events from './events'
 import Match from './match'
 import PATTERNDATA from './malayalam.json'
@@ -8,12 +7,10 @@ import PATTERNDATA from './malayalam.json'
 export default class Mlhand {
   constructor (options) {
     this.canvasElement = options.canvas
-    this.simplifiedCanvasElement = options.simplifiedCanvas
     this.onResult = options.onResult
     this.events = new Events()
     this.pad = null
-    this.simplePad = null
-    this.simplifyAndMatch = false
+    this.debug = options.debug
     this.init()
   }
 
@@ -24,45 +21,31 @@ export default class Mlhand {
     })
 
     this.pad.listen()
-    if (this.simplifiedCanvasElement) {
-      this.simplePad = new Pad({
-        canvas: this.simplifiedCanvasElement,
-        events: this.events
-      })
-      this.simplifyAndMatch = true
-    }
 
     this.events.subscribe('/draw/pen/down', this.onPenDown.bind(this))
     this.events.subscribe('/draw/pen/up', this.onPenUp.bind(this))
   }
 
   onPenDown (data) {
-    if (this.simplePad) {
-      this.simplePad.clear()
-    }
+    // new drawing
   }
 
   onPenUp (data) {
-    let simplifiedPoints, box, translatedPoints
+    let simplifiedPoints, translatedPoints
     if (!data.points.length) return
-    if (this.simplifyAndMatch) {
+    if (this.debug) {
       simplifiedPoints = simplify(data.points, 1, true)
-      log('Simplifed ' + data.points.length + ' points to ' + simplifiedPoints.length + ' points.')
-      this.simplePad.setPoints(simplifiedPoints)
-      box = this.simplePad.getBoundingBox()
+      console.debug('Simplifed ' + data.points.length + ' points to ' + simplifiedPoints.length + ' points.')
+      let box = this.pad.getBoundingBox()
       translatedPoints = this.translate(simplifiedPoints, box)
-      this.simplePad.setPoints(translatedPoints)
-      log(JSON.stringify(translatedPoints))
-      this.simplePad.draw()
-      this.simplePad.drawBoundingBox()
+      console.debug(JSON.stringify(translatedPoints))
     }
     this.pad.clear()
     let match = new Match(PATTERNDATA)
     let result = match.run(data.points)
-    log(result)
-    document.getElementById('result').innerHTML = result.pattern || ''
+    console.debug(JSON.stringify(result))
     this.onResult(result.pattern)
-  };
+  }
 
   translate (points, box) {
     let translatedPoints = []

@@ -1,30 +1,32 @@
 <!doctype html>
 <html lang="en">
-
 	<head>
 		<meta charset="utf-8">
+		<meta name="theme-color" content="#2B3A42"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>Handwriting</title>
 		<link rel="stylesheet" href="css/style.css">
 		<script src="dist/mlhand.js"></script>
 		<script>
 			window.addEventListener('load', () => {
+				let canvas=document.getElementById('pad')
+				canvas.width= document.body.clientWidth
+				canvas.height= document.body.clientHeight*0.5;
 				const hw = new Mlhand({
-					canvas: document.getElementById('pad'),
-					simplifiedCanvas: document.getElementById('simplified'),
+					canvas:canvas,
 					onResult: (result) => {
 						if (result) {
 							document.getElementById('result').value += result;
 						}
-					}
+					},
+					debug: true
 				});
 			});
 		</script>
 	</head>
-
 	<body>
 		<div class="container">
-			<canvas id="pad" width="500" height="500"></canvas>
-			<!-- <canvas id="simplified" width="500" height="500"></canvas> -->
+			<canvas id="pad"></canvas>
 		</div>
 		<textarea id="result"></textarea>
 	</body>

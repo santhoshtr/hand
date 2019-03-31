@@ -5,14 +5,17 @@ export default class Pad {
     this.canvasContext = this.canvas.getContext('2d')
     this.points = []
   }
+
   setPenStyle () {
     this.canvasContext.lineCap = 'round'
     this.canvasContext.lineWidth = 2
     this.canvasContext.strokeStyle = 'steelblue'
   }
+
   clear () {
     this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
+
   draw () {
     this.setPenStyle()
     this.canvasContext.beginPath()
@@ -26,12 +29,13 @@ export default class Pad {
     }
     this.canvasContext.stroke()
   }
+
   listen () {
-    var isDown = false
-    var self = this
-    var last
+    let isDown = false
+    let self = this
+    let last
     this.canvas.onmousedown = (e) => {
-      var pos = getXY(e)
+      let pos = getXY(e)
       last = pos
       this.points = []
       isDown = true
@@ -44,7 +48,7 @@ export default class Pad {
       if (!isDown) {
         return
       }
-      var pos = getXY(e)
+      let pos = getXY(e)
       this.points.push(pos)
       this.canvasContext.beginPath()
       this.canvasContext.moveTo(last.x, last.y)
@@ -52,6 +56,7 @@ export default class Pad {
       this.canvasContext.stroke()
       last = pos
     }
+
     this.canvas.onmouseup = (e) => {
       if (!isDown) {
         return
@@ -66,7 +71,7 @@ export default class Pad {
     this.canvas.ontouchend = this.canvas.onmouseup
 
     function getXY (e) {
-      var rect = self.canvas.getBoundingClientRect()
+      let rect = self.canvas.getBoundingClientRect()
       if (e.type.indexOf('touch') >= 0) {
         return {
           x: e.targetTouches[0].clientX - rect.left,
@@ -80,17 +85,18 @@ export default class Pad {
       }
     }
   }
+
   setPoints (points) {
     this.points = points
   }
 
   getBoundingBox () {
-    var minX = this.canvas.width
-    var minY = this.canvas.height
-    var maxX = 0
-    var maxY = 0
-    var i = 0
-    var p
+    let minX = this.canvas.width
+    let minY = this.canvas.height
+    let maxX = 0
+    let maxY = 0
+    let i = 0
+    let p
     for (i = 0; i < this.points.length; i++) {
       p = this.points[i]
       if (p.x <= minX) {
@@ -113,8 +119,9 @@ export default class Pad {
       y2: maxY
     }
   }
+
   drawBoundingBox () {
-    var box = this.getBoundingBox()
+    let box = this.getBoundingBox()
     this.canvasContext.lineWidth = 2
     this.canvasContext.strokeStyle = '#cc0'
     this.canvasContext.strokeRect(box.x1, box.y1, box.x2, box.y2)

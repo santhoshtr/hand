@@ -1,11 +1,9 @@
-import log from './log'
-import levenshteinDistance from './levenshteinDistance'
 import { shapeSimilarity } from 'curve-matcher'
 
 export default class Match {
   constructor (data) {
     this.data = data
-    this.threshold = 0.8
+    this.threshold = 0.85
   }
 
   run (stroke) {
@@ -15,7 +13,7 @@ export default class Match {
     if (!stroke || !stroke.length) return
     let keys = Object.keys(this.data)
     for (let i = 0; i < keys.length; i++) {
-      // log('Matching ' + keys[i])
+      // console.debug('Matching ' + keys[i])
       let score = this.match(stroke, this.data[keys[i]].points)
       if (score >= this.threshold && score >= result.score) {
         let pattern = keys[i]
@@ -33,33 +31,6 @@ export default class Match {
 
   match (path, candidatePath) {
     return shapeSimilarity(path, candidatePath)
-  }
-
-  match2 (path, candidatePath) {
-    let penalty = 0
-    let lengthDiff
-    let ld = levenshteinDistance(path, candidatePath, (a, b) => this.distance(a, b) <= 100)
-    log('levenshteinDistance: ' + ld)
-    if (ld < path.length / 3) {
-      return 1 - (ld / path.length)
-    }
-    if (path.length !== candidatePath.length) {
-      lengthDiff = candidatePath.length - path.length
-      penalty += 0.1 * Math.abs(lengthDiff)
-    }
-    if (penalty > this.threshold / 2) {
-      // Early return
-      return 1 - penalty
-    }
-    let p2
-    for (let i = 0; i < path.length; i++) {
-      let p1 = path[i]
-      p2 = candidatePath[i] || p2 // Previous p2
-      let distance = this.distance(p1, p2)
-      log(' >> ' + JSON.stringify(p1) + ' & ' + JSON.stringify(p2) + ': distance = ' + distance)
-      penalty += 0.001 * distance
-    }
-    return 1 - penalty
   }
 
   distance (p1, p2) {
