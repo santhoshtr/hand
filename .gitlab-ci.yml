@@ -1,0 +1,26 @@
+image: node:latest
+
+cache:
+    paths:
+        - node_modules/
+
+stages:
+    - setup
+    - build
+
+setup:
+    stage: setup
+    script:
+        - echo "Setup started"
+        - npm install
+    artifacts:
+        paths:
+            - node_modules/
+
+build:
+    stage: build
+    script:
+        - npm run build
+    artifacts:
+        paths:
+            - dist/
