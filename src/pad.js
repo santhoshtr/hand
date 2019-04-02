@@ -8,7 +8,7 @@ export default class Pad {
 
   setPenStyle () {
     this.canvasContext.lineCap = 'round'
-    this.canvasContext.lineWidth = 2
+    this.canvasContext.lineWidth = 4
     this.canvasContext.strokeStyle = 'steelblue'
   }
 

@@ -10,10 +10,11 @@
 		<script src="dist/mlhand.js"></script>
 		<script>
 			window.addEventListener('load', () => {
-				let canvas = document.getElementById('pad')
+				let canvas = document.getElementsByClassName('pad')[0]
 				let candidates = document.getElementsByClassName('candidates')[0]
 				canvas.width = document.body.clientWidth
 				canvas.height = document.body.clientHeight * 0.5;
+				document.getElementById('result').value ='';
 				const hw = new Mlhand({
 					canvas: canvas,
 					threshold: 0.85,
@@ -42,9 +43,10 @@
 		<nav>
 			<h1>Malayalam Handwriting recognition</h1>
 		</nav>
+		<p>ഇവിടെയെഴുതുക:</p>
 		<div class="container">
-			<p>ഇവിടെയെഴുതുക:</p>
-			<canvas id="pad"></canvas>
+			<canvas class="pad"></canvas>
+			<div class="tools"><button>&lt;</button><button>&nbsp;&nbsp;&nbsp;space&nbsp;&nbsp;&nbsp;</button><button>x</button></div>
 			<div class="candidates"></div>
 			<textarea id="result"></textarea>
 		</div>
