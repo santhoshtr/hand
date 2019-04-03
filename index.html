@@ -9,33 +9,46 @@
 		<link rel="stylesheet" href="css/style.css">
 		<script src="dist/mlhand.js"></script>
 		<script>
-			window.addEventListener('load', () => {
-				let canvas = document.getElementsByClassName('pad')[0]
+			function onResult(results) {
 				let candidates = document.getElementsByClassName('candidates')[0]
+				if (results && results.length) {
+					candidates.innerHTML = ''
+					document.getElementById('result').value += results[0].pattern;
+					console.log("Match: " + JSON.stringify(results[0]))
+					for (let i = 1; i < results.length; i++) {
+						let button = document.createElement('button')
+						button.innerText = results[i].pattern;
+						button.title = results[i].score;
+						candidates.appendChild(button);
+					}
+				} else {
+					candidates.innerHTML = 'No match'
+				}
+			}
+
+			function initPad() {
+				let canvas = document.getElementsByClassName('pad')[0]
 				canvas.width = document.body.clientWidth
-				canvas.height = document.body.clientHeight * 0.5;
-				document.getElementById('result').value ='';
+				canvas.height = document.body.clientHeight * 0.4;
+				document.getElementById('result').value = '';
 				const hw = new Mlhand({
 					canvas: canvas,
 					threshold: 0.85,
-					onResult: (results) => {
-						if (results && results.length) {
-							candidates.innerHTML = ''
-							document.getElementById('result').value += results[0].pattern;
-							console.log("Match: " + JSON.stringify(results[0]))
-							for (let i = 1; i < results.length; i++) {
-								let button = document.createElement('button')
-								button.innerText = results[i].pattern;
-								button.title = results[i].score;
-								candidates.appendChild(button);
-							}
-						} else {
-							candidates.innerHTML = 'No match'
-						}
-					},
+					onResult: onResult,
 					debug: true
 				});
-			});
+
+				document.getElementsByClassName('space')[0].onclick = ()=>{
+					document.getElementById('result').value = document.getElementById('result').value + ' ';
+				},
+				document.getElementsByClassName('backspace')[0].onclick = ()=>{
+					document.getElementById('result').value = document.getElementById('result').value.slice(0, -1);
+				}
+				document.getElementsByClassName('back')[0].onclick = ()=>{
+					hw.previous();
+				}
+			}
+			window.addEventListener('load', initPad);
 		</script>
 	</head>
 
@@ -46,7 +59,11 @@
 		<p>ഇവിടെയെഴുതുക:</p>
 		<div class="container">
 			<canvas class="pad"></canvas>
-			<div class="tools"><button>&lt;</button><button>&nbsp;&nbsp;&nbsp;space&nbsp;&nbsp;&nbsp;</button><button>x</button></div>
+			<div class="tools">
+				<button class='back'>Back ↶</button>
+				<button class='space'>Space</button>
+				<button class='backspace'>Backspace ⇦</button>
+			</div>
 			<div class="candidates"></div>
 			<textarea id="result"></textarea>
 		</div>

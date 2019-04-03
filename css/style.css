@@ -2,10 +2,11 @@ body {
     overflow: hidden;
     height: 100vh;
     font-family: "Manjari", "Rachana", sans-serif;
+    font-size: 1em;
 }
 
 h1 {
-    font-size: 1em;
+    font-size: 1.4em;
     margin: 0;
 }
 
@@ -17,20 +18,20 @@ h1 {
 }
 
 .pad {
-    border: 1px dotted #565656;
+    outline: 1px dotted #565656;
     background-color: ivory;
     margin: 0;
     padding: 0;
+    z-index: 1;
 }
 
 .pad.inactive {
-    border: 0;
+    outline: 0;
     position: absolute;
     top: 0;
     left: 0;
-    transition:left 0.5s linear;
-    opacity: 0.5;
-    z-index: 1;
+    transition: left 0.5s linear;
+    z-index: 2;
 }
 
 #result {
@@ -39,7 +40,6 @@ h1 {
     background-color: #fff;
     color: steelblue;
     width: 100%;
-    border: 0;
     height: 200px;
 }
 
@@ -59,4 +59,26 @@ h1 {
     min-height: 1.5em;
     cursor: pointer;
 
+}
+
+.tools {
+    display: flex;
+}
+
+.tools button {
+    margin: 2px;
+    height: 3em;
+    font-size: 1em;
+}
+
+.tools .back {
+    flex-grow: 2;
+}
+
+.tools .space {
+    flex-grow: 6;
+}
+
+.tools .backspace {
+    flex-grow: 2;
 }

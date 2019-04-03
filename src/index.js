@@ -81,6 +81,14 @@ export default class Mlhand {
     this.previousPad.canvas.style.left = `${-1 * this.canvasElement.width * 0.9}px`
   }
 
+  /**
+   * Show previous pad, and hide after double timeout
+   */
+  previous () {
+    this.previousPad.canvas.style.left = `${0}px`
+    this.timer = setTimeout(this.pushSegment.bind(this, this.segments.pop()), this.TIMEOUT * 2)
+  }
+
   translate (points, box) {
     let translatedPoints = []
 
