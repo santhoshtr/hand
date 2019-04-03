@@ -63,11 +63,11 @@ export default class Mlhand {
     let match = new Match(PATTERNDATA, this.threshold)
     let result = match.run(data.points)
     this.onResult(result)
-    this.timer = setTimeout(this.pushSegment.bind(this, data.points), this.TIMEOUT)
+    this.timer = setTimeout(this.pushSegment.bind(this, this.pad.data), this.TIMEOUT)
   }
 
-  pushSegment (points) {
-    this.segments.push(points)
+  pushSegment (segmentData) {
+    this.segments.push(segmentData)
     if (!this.previousPad) {
       this.previousPad = new Pad({
         canvas: this.createPreviousCanvas(),
@@ -76,7 +76,7 @@ export default class Mlhand {
     }
     this.pad.clear()
     this.previousPad.clear()
-    this.previousPad.setPoints(points)
+    this.previousPad.setData(segmentData)
     this.previousPad.draw()
     this.previousPad.canvas.style.left = `${-1 * this.canvasElement.width * 0.9}px`
   }

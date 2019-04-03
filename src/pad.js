@@ -4,6 +4,7 @@ export default class Pad {
     this.events = options.events
     this.canvasContext = this.canvas.getContext('2d')
     this.points = []
+    this.data = []
   }
 
   setPenStyle () {
@@ -14,17 +15,21 @@ export default class Pad {
 
   clear () {
     this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.data = []
   }
 
   draw () {
     this.setPenStyle()
     this.canvasContext.beginPath()
-    for (let i = 0; i < this.points.length; i++) {
-      let p = this.points[i]
-      if (i === 0) {
-        this.canvasContext.moveTo(p.x, p.y)
-      } else {
-        this.canvasContext.lineTo(p.x, p.y)
+    for (let i = 0; i < this.data.length; i++) {
+      let points = this.data[i].points
+      for (let j = 0; j < points.length; j++) {
+        let p = points[j]
+        if (j === 0) {
+          this.canvasContext.moveTo(p.x, p.y)
+        } else {
+          this.canvasContext.lineTo(p.x, p.y)
+        }
       }
     }
     this.canvasContext.stroke()
@@ -62,9 +67,11 @@ export default class Pad {
         return
       }
       isDown = false
-      this.events.publish('/draw/pen/up', {
+      const data = {
         points: this.points
-      })
+      }
+      this.events.publish('/draw/pen/up', data)
+      self.data.push(data)
     }
     this.canvas.ontouchstart = this.canvas.onmousedown
     this.canvas.ontouchmove = this.canvas.onmousemove
@@ -86,8 +93,8 @@ export default class Pad {
     }
   }
 
-  setPoints (points) {
-    this.points = points
+  setData (data) {
+    this.data = data
   }
 
   getBoundingBox () {
