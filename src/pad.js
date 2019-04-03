@@ -10,7 +10,7 @@ export default class Pad {
   setPenStyle () {
     this.canvasContext.lineCap = 'round'
     this.canvasContext.lineWidth = 4
-    this.canvasContext.strokeStyle = 'steelblue'
+    this.canvasContext.strokeStyle = '#4169E1' // Royal Blue color.
   }
 
   clear () {
@@ -125,13 +125,5 @@ export default class Pad {
       x2: maxX,
       y2: maxY
     }
-  }
-
-  drawBoundingBox () {
-    let box = this.getBoundingBox()
-    this.canvasContext.lineWidth = 2
-    this.canvasContext.strokeStyle = '#cc0'
-    this.canvasContext.strokeRect(box.x1, box.y1, box.x2, box.y2)
-    this.canvasContext.lineWidth = this.canvasContext.lineWidth
   }
 }
