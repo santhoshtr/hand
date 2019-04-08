@@ -27,7 +27,7 @@
   },
   "homepage": "https://gitlab.com/santhoshtr/hand#readme",
   "dependencies": {
-    "curve-matcher": "^1.0.1",
+    "curve-matcher": "^1.1.0",
     "simplify-js": "^1.2.3"
   },
   "devDependencies": {

@@ -14,9 +14,9 @@ export default class Match {
     let keys = Object.keys(this.data)
     for (let i = 0; i < keys.length; i++) {
       let key = keys[i]
-      let strokes = this.data[key].strokes
-      for (let j = 0; j < strokes.length; j++) {
-        let candidateStroke = strokes[j]
+      let candidateStrokes = this.data[key].strokes
+      for (let j = 0; j < candidateStrokes.length; j++) {
+        let candidateStroke = candidateStrokes[j]
         let score = this.match(stroke, candidateStroke)
         if (score >= this.threshold) {
           let pattern = key
@@ -28,6 +28,8 @@ export default class Match {
   }
 
   match (path, candidatePath) {
-    return shapeSimilarity(path, candidatePath)
+    return shapeSimilarity(path, candidatePath, {
+      restrictRotationAngle: 0.5235988// 30 degree in radians
+    })
   }
 }

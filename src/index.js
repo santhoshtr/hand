@@ -10,6 +10,7 @@ export default class Mlhand {
     this.onResult = options.onResult
     this.threshold = options.threshold || 0.85
     this.events = new Events()
+    this.match = new Match(PATTERNDATA, this.threshold)
     this.pad = null
     this.timer = null
     this.debug = options.debug
@@ -60,8 +61,7 @@ export default class Mlhand {
       translatedPoints = this.translate(simplifiedPoints, box)
       console.debug(JSON.stringify(translatedPoints))
     }
-    let match = new Match(PATTERNDATA, this.threshold)
-    let result = match.run(data.points)
+    let result = this.match.run(data.points)
     this.onResult(result)
     this.timer = setTimeout(this.pushSegment.bind(this, this.pad.data), this.TIMEOUT)
   }
