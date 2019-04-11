@@ -2,15 +2,22 @@ import Pad from './pad'
 import simplify from 'simplify-js'
 import Events from './events'
 import Match from './match'
-import PATTERNDATA from './malayalam.json'
+import MalayalamData from './data/malayalam.json'
+import TamilData from './data/tamil.json'
 
-export default class Mlhand {
+const ScriptData = {
+  'malayalam': MalayalamData,
+  'tamil': TamilData
+}
+
+export default class HandwritingRecognition {
   constructor (options) {
     this.canvasElement = options.canvas
     this.onResult = options.onResult
     this.threshold = options.threshold || 0.85
+    this.script = options.script
     this.events = new Events()
-    this.match = new Match(PATTERNDATA, this.threshold)
+    this.match = new Match(ScriptData[this.script], this.threshold)
     this.pad = null
     this.timer = null
     this.debug = options.debug

@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Handwriting</title>
 		<link rel="stylesheet" href="css/style.css">
-		<script src="dist/mlhand.js"></script>
+		<script src="dist/handwriting-recognition.js"></script>
 		<script>
 			function onResult(results) {
 				let candidates = document.getElementsByClassName('candidates')[0]
@@ -26,14 +26,19 @@
 				}
 			}
 
+			function onLanguageChange(){
+				initPad();
+			}
+
 			function initPad() {
 				let canvas = document.getElementsByClassName('pad')[0]
 				canvas.width = document.body.clientWidth
 				canvas.height = document.body.clientHeight * 0.4;
 				document.getElementById('result').value = '';
-				const hw = new Mlhand({
+				const hw = new HandwritingRecognition({
 					canvas: canvas,
 					threshold: 0.85,
+					script: document.getElementsByClassName('language')[0].value,
 					onResult: onResult,
 					debug: true
 				});
@@ -54,7 +59,7 @@
 
 	<body>
 		<nav>
-			<h1>Malayalam Handwriting recognition</h1>
+			<h1>Handwriting recognition</h1>
 		</nav>
 		<textarea id="result"></textarea>
 		<div class="candidates"></div>
@@ -62,6 +67,10 @@
 			<canvas class="pad"></canvas>
 			<div class="tools">
 				<button class='back'>Back ↶</button>
+				<select class='language' onchange="onLanguageChange()">
+					<option value="malayalam">മലയാളം</option>
+					<option value="tamil">தமிழ்</option>
+				</select>
 				<button class='space'>Space</button>
 				<button class='backspace'>Backspace ⇦</button>
 			</div>

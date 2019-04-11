@@ -1,7 +1,7 @@
-Handwriting recognition for Malayalam
-=====================================
+Handwriting recognition for Malayalam, Tamil
+============================================
 
-This is online handwriting recognition and input tool for Malayalam.
+This is online handwriting recognition and input tool for Malayalam and Tamil
 
 How it works
 ------------

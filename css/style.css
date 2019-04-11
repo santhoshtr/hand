@@ -73,10 +73,9 @@ h1 {
     display: flex;
 }
 
-.tools button {
-    margin: 2px;
+.tools button,
+.tools select {
     height: 3em;
-    font-size: 1em;
 }
 
 .tools .back {
@@ -84,9 +83,13 @@ h1 {
 }
 
 .tools .space {
-    flex-grow: 6;
+    flex-grow: 7;
 }
 
 .tools .backspace {
     flex-grow: 2;
+}
+
+.tools .language {
+    flex-grow: 1;
 }
