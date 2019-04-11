@@ -61,14 +61,12 @@ export default class HandwritingRecognition {
     if (this.timer) {
       clearTimeout(this.timer)
     }
-    if (this.debug) {
-      simplifiedPoints = simplify(data.points, 1, true)
-      console.debug('Simplifed ' + data.points.length + ' points to ' + simplifiedPoints.length + ' points.')
-      let box = this.pad.getBoundingBox()
-      translatedPoints = this.translate(simplifiedPoints, box)
-      console.debug(JSON.stringify(translatedPoints))
-    }
-    let result = this.match.run(data.points)
+    simplifiedPoints = simplify(data.points, 10, false)
+    console.debug('Simplifed ' + data.points.length + ' points to ' + simplifiedPoints.length + ' points.')
+    let box = this.pad.getBoundingBox()
+    translatedPoints = this.translate(simplifiedPoints, box)
+    console.debug(JSON.stringify(translatedPoints))
+    let result = this.match.run(translatedPoints)
     this.onResult(result)
     this.timer = setTimeout(this.pushSegment.bind(this, this.pad.data), this.TIMEOUT)
   }
