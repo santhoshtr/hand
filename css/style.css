@@ -1,8 +1,13 @@
+html{
+    overflow: hidden;
+}
+
 body {
     overflow: hidden;
     height: 100vh;
     font-family: "Manjari", "Rachana", sans-serif;
     font-size: 1em;
+    position: relative;
     margin: 0;
     padding: 0;
 }
