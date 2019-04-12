@@ -8,7 +8,7 @@ function onResult (results) {
     candidates.innerHTML = ''
     document.getElementById('result').value += results[0].pattern
     console.log('Match: ' + JSON.stringify(results[0]))
-    for (let i = 1; i < results.length; i++) {
+    for (let i = 1; i < Math.min(3, results.length); i++) {
       let button = document.createElement('button')
       button.innerText = results[i].pattern
       button.title = results[i].score
@@ -24,7 +24,6 @@ function onLanguageChange () {
 }
 
 function onPenDown () {
-  console.log('pendown')
   if (timer) {
     clearTimeout(timer)
   }
@@ -42,7 +41,7 @@ function onTimeout () {
 function getRecognizer (script, onResult) {
   // eslint-disable-next-line no-undef
   return new HandwritingRecognition({
-    threshold: 0.85,
+    threshold: 0.90,
     script,
     onResult
   })
