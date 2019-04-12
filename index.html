@@ -6,55 +6,10 @@
 		<meta name="theme-color" content="#2B3A42" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Handwriting</title>
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="ui/style.css">
 		<script src="dist/handwriting-recognition.js"></script>
-		<script>
-			function onResult(results) {
-				let candidates = document.getElementsByClassName('candidates')[0]
-				if (results && results.length) {
-					candidates.innerHTML = ''
-					document.getElementById('result').value += results[0].pattern;
-					console.log("Match: " + JSON.stringify(results[0]))
-					for (let i = 1; i < results.length; i++) {
-						let button = document.createElement('button')
-						button.innerText = results[i].pattern;
-						button.title = results[i].score;
-						candidates.appendChild(button);
-					}
-				} else {
-					candidates.innerHTML = 'No match'
-				}
-			}
-
-			function onLanguageChange(){
-				initPad();
-			}
-
-			function initPad() {
-				let canvas = document.getElementsByClassName('pad')[0]
-				canvas.width = document.body.clientWidth
-				canvas.height = document.body.clientHeight * 0.4;
-				document.getElementById('result').value = '';
-				const hw = new HandwritingRecognition({
-					canvas: canvas,
-					threshold: 0.85,
-					script: document.getElementsByClassName('language')[0].value,
-					onResult: onResult,
-					debug: true
-				});
-
-				document.getElementsByClassName('space')[0].onclick = ()=>{
-					document.getElementById('result').value = document.getElementById('result').value + ' ';
-				},
-				document.getElementsByClassName('backspace')[0].onclick = ()=>{
-					document.getElementById('result').value = document.getElementById('result').value.slice(0, -1);
-				}
-				document.getElementsByClassName('back')[0].onclick = ()=>{
-					hw.previous();
-				}
-			}
-			window.addEventListener('load', initPad);
-		</script>
+		<script src="ui/main.js"></script>
+		<script src="ui/pad.js"></script>
 	</head>
 
 	<body>
