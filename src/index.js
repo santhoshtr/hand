@@ -4,7 +4,7 @@ import MatchWorker from 'worker-loader?inline!./worker.js'
 export default class HandwritingRecognition {
   constructor (options) {
     this.onResult = options.onResult
-    this.threshold = options.threshold || 0.85
+    this.threshold = options.threshold || 0.90
     this.script = options.script
     this.matchers = []
     this.matcherIndex = 0
@@ -23,7 +23,6 @@ export default class HandwritingRecognition {
       strokes: data.points
     })
     this.matchers[this.matcherIndex].onmessage = (message) => {
-      console.log(message.data)
       this.onResult(message.data)
     }
     this.matcherIndex++
