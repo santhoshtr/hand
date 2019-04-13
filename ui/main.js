@@ -47,15 +47,19 @@ function getRecognizer (script, onResult) {
   })
 }
 
-function init () {
+function initPad () {
   let canvas = document.getElementsByClassName('pad')[0]
-  let script = document.getElementsByClassName('language')[0].value
   canvas.width = document.body.clientWidth
   canvas.height = document.body.clientHeight * 0.4
-  document.getElementById('result').value = ''
   // eslint-disable-next-line no-undef
   pad = new WritingPad({ canvas, onPenDown, onPenUp })
-  // eslint-disable-next-line no-undef
+}
+
+function init () {
+  let script = document.getElementsByClassName('language')[0].value
+  document.getElementById('result').value = ''
+  initPad()
+
   hwr = getRecognizer(script, onResult)
 
   document.getElementsByClassName('space')[0].onclick = () => {
@@ -71,6 +75,7 @@ function init () {
   }
 
   document.getElementsByClassName('language')[0].onchange = onLanguageChange
+  document.body.onresize = initPad
 }
 
 window.addEventListener('load', init)
