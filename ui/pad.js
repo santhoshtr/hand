@@ -1,3 +1,5 @@
+
+// eslint-disable-next-line no-unused-vars
 class WritingPad {
   constructor (options) {
     this.canvas = options.canvas
