@@ -1,13 +1,12 @@
-let hwr, pad, timer
-
-const TIMEOUT = 1500
+let hwr, pad
 
 function onResult (results) {
   let candidates = document.getElementsByClassName('candidates')[0]
   if (results && results.length) {
     candidates.innerHTML = ''
     document.getElementById('result').value += results[0].pattern
-    console.log('Match: ' + JSON.stringify(results[0]))
+    console.log(JSON.stringify({ 'match': results[0] }))
+
     for (let i = 1; i < Math.min(3, results.length); i++) {
       let button = document.createElement('button')
       button.innerText = results[i].pattern
@@ -24,18 +23,11 @@ function onLanguageChange () {
 }
 
 function onPenDown () {
-  if (timer) {
-    clearTimeout(timer)
-  }
+
 }
 
 function onPenUp (data) {
   hwr.queue(data)
-  timer = setTimeout(onTimeout, TIMEOUT)
-}
-
-function onTimeout () {
-  pad.clear()
 }
 
 function getRecognizer (script, onResult) {

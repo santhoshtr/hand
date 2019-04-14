@@ -121,11 +121,14 @@ class WritingPad {
     }
     this.isDown = false
     const data = {
-      points: this.points
+      points: this.points,
+      box: this.getBoundingBox()
     }
     this.data.push(data)
     this.options.onPenUp(data)
-    this.timer = setTimeout(this.pushSegment.bind(this, this.data), this.TIMEOUT)
+    if (data.box.x2 > this.canvas.width * 0.75) {
+      this.timer = setTimeout(this.pushSegment.bind(this, this.data), this.TIMEOUT)
+    }
   }
 
   setData (data) {
@@ -152,10 +155,8 @@ class WritingPad {
     let minY = this.canvas.height
     let maxX = 0
     let maxY = 0
-    let i = 0
-    let p
-    for (i = 0; i < this.points.length; i++) {
-      p = this.points[i]
+    for (let i = 0; i < this.points.length; i++) {
+      let p = this.points[i]
       if (p.x <= minX) {
         minX = p.x
       }

@@ -2,8 +2,11 @@ import Match from './match'
 
 /* global self */
 self.onmessage = (message) => {
-  const matcher = new Match(message.data.scriptData, message.data.threshold)
+  const matcher = new Match(message.data.script, message.data.threshold)
 
-  let results = matcher.run(message.data.strokes)
+  let results = {
+    candidates: matcher.run(message.data.strokes),
+    id: message.data.id
+  }
   self.postMessage(results)
 }
