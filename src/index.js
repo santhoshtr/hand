@@ -1,10 +1,11 @@
 
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import MatchWorker from 'worker-loader?inline!./worker.js'
 
 export default class HandwritingRecognition {
   constructor (options) {
     this.onResult = options.onResult
-    this.threshold = options.threshold || 0.90
+    this.threshold = options.threshold || 0.88
     this.script = options.script
     this.matchers = []
     this.matcherIndex = 0
