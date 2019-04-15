@@ -37,8 +37,7 @@ class WritingPad {
     this.segments.push(segmentData)
     if (!this.previousPad) {
       this.previousPad = new WritingPad({
-        canvas: this.createPreviousCanvas(),
-        events: this.events
+        canvas: this.createPreviousCanvas()
       })
     }
 
@@ -71,7 +70,7 @@ class WritingPad {
   draw () {
     this.canvasContext.beginPath()
     for (let i = 0; i < this.data.length; i++) {
-      let points = this.data[i].points
+      let points = this.data[i].points || this.data[i]
       for (let j = 0; j < points.length; j++) {
         let p = points[j]
         if (j === 0) {
@@ -96,9 +95,12 @@ class WritingPad {
     this.points = []
     this.isDown = true
     this.points.push(pos)
-    this.options.onPenDown()
-    if (this.timer) {
-      clearTimeout(this.timer)
+    if (this.options.onPenDown) {
+      this.options.onPenDown()
+
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
     }
   }
 
