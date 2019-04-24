@@ -19,7 +19,9 @@ class WritingPad {
     this.segments = []
     this.TIMEOUT = 1500
     this.setPenStyle(strokeOptions)
-    this.listen()
+    if (!options.readonly) {
+      this.listen()
+    }
   }
 
   setPenStyle (strokeOptions) {
