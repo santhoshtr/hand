@@ -1,14 +1,19 @@
 var scripts = []
 
 function init () {
-  var tabs = M.Tabs.init(document.querySelectorAll('.tabs'), {
-  })
+  var tabs = M.Tabs.init(document.querySelectorAll('.tabs'))
   tabs = M.Tabs.getInstance(document.querySelectorAll('.tabs')[0])
   tabs.select('malayalam')
   var elems = document.querySelectorAll('.collapsible')
   var collapsibles = M.Collapsible.init(elems, {})
   loadScript('malayalam').then(() => renderData('malayalam'))
   loadScript('tamil').then(() => renderData('tamil'))
+
+  Array.from(document.querySelectorAll('.download')).forEach(link => {
+    link.addEventListener('click', function (event) {
+      download(this.dataset.script)
+    })
+  })
 }
 
 function renderData (script) {
@@ -19,7 +24,7 @@ function renderData (script) {
     let header = document.createElement('div')
     header.className = 'collapsible-header'
     let icon = document.createElement('i')
-    icon.innerText = 'brush'
+    icon.innerText = 'gesture'
     icon.className = 'material-icons'
     header.appendChild(icon)
     header.appendChild(document.createTextNode(pattern))
@@ -32,11 +37,11 @@ function renderData (script) {
     canvas.width = document.body.clientWidth * 0.9
     canvas.height = 500
     let pad = new WritingPad({
-      canvas: canvas
+      canvas: canvas,
+      readonly: true
     })
     drawData(pad, scriptdata[pattern].strokes)
     itemData.appendChild(canvas)
-    // itemData.innerText = JSON.stringify(scriptdata[pattern].strokes)
     item.appendChild(itemData)
     collapsible.appendChild(item)
   }
@@ -45,6 +50,17 @@ function renderData (script) {
 function drawData (pad, data) {
   pad.setData(data)
   pad.draw()
+}
+
+function download (script) {
+  var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(scripts[script], null, 2))
+  var downloadAnchorNode = document.createElement('a')
+  downloadAnchorNode.setAttribute('href', dataStr)
+  downloadAnchorNode.setAttribute('download', script + '.json')
+  document.body.appendChild(downloadAnchorNode) // required for firefox
+  downloadAnchorNode.click()
+  downloadAnchorNode.remove()
+  return false
 }
 
 function loadScript (script) {
