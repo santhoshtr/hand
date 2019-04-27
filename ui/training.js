@@ -1,3 +1,4 @@
+/* global M, WritingPad */
 var scripts = []
 
 function init () {
@@ -5,7 +6,7 @@ function init () {
   tabs = M.Tabs.getInstance(document.querySelectorAll('.tabs')[0])
   tabs.select('malayalam')
   var elems = document.querySelectorAll('.collapsible')
-  var collapsibles = M.Collapsible.init(elems, {})
+  M.Collapsible.init(elems, {})
   loadScript('malayalam').then(() => renderData('malayalam'))
   loadScript('tamil').then(() => renderData('tamil'))
 
@@ -32,23 +33,58 @@ function renderData (script) {
 
     let itemData = document.createElement('div')
     itemData.className = 'collapsible-body'
+
+    renderSamples(script, pattern, itemData)
+    item.appendChild(itemData)
+
+    collapsible.appendChild(item)
+  }
+}
+
+function renderSamples (script, pattern, itemData) {
+  const scriptdata = scripts[script]
+  let samples = scriptdata[pattern].samples
+
+  let actions = document.createElement('div')
+  actions.className = 'actions'
+  let add = document.createElement('button')
+  add.className = 'actions-add btn waves-effect waves-light'
+  add.innerText = 'add'
+  actions.appendChild(add)
+  let remove = document.createElement('button')
+  remove.className = 'actions-remove btn waves-effect waves-light'
+  remove.innerText = 'remove'
+  actions.appendChild(remove)
+
+  itemData.appendChild(actions)
+
+  for (let i = 0; i < samples.length; i++) {
+    let sampleElement = document.createElement('label')
+    sampleElement.className = 'row'
+    let checkbox = document.createElement('input')
+    checkbox.type = 'checkbox'
+    checkbox.name = pattern
+    checkbox.value = i
+    let labelText = document.createElement('span')
+    labelText.innerText = 'Sample-' + i
     let canvas = document.createElement('canvas')
-    canvas.className = 'yellow lighten-5'
+    canvas.className = 'yellow lighten-5 col s12'
     canvas.width = document.body.clientWidth * 0.9
     canvas.height = 500
     let pad = new WritingPad({
       canvas: canvas,
       readonly: true
     })
-    drawData(pad, scriptdata[pattern].strokes)
-    itemData.appendChild(canvas)
-    item.appendChild(itemData)
-    collapsible.appendChild(item)
+    drawData(pad, samples[i])
+    sampleElement.appendChild(checkbox)
+    sampleElement.appendChild(labelText)
+    sampleElement.appendChild(canvas)
+    itemData.appendChild(sampleElement)
   }
 }
 
 function drawData (pad, data) {
-  pad.setData(data)
+  pad.setData(data.strokes)
   pad.draw()
 }
 

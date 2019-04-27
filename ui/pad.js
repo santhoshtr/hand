@@ -39,7 +39,8 @@ class WritingPad {
     this.segments.push(segmentData)
     if (!this.previousPad) {
       this.previousPad = new WritingPad({
-        canvas: this.createPreviousCanvas()
+        canvas: this.createPreviousCanvas(),
+        readonly: true
       })
     }
 

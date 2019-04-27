@@ -1,3 +1,4 @@
+/* global HandwritingRecognition */
 let hwr, pad
 
 function onResult (results) {
@@ -5,7 +6,7 @@ function onResult (results) {
   if (results && results.length) {
     candidates.innerHTML = ''
     document.getElementById('result').value += results[0].pattern
-    console.log(JSON.stringify({ 'match': results[0] }))
+    console.log(JSON.stringify({ 'match': results[0] }, null, 2))
 
     for (let i = 1; i < Math.min(3, results.length); i++) {
       let button = document.createElement('button')
@@ -31,9 +32,8 @@ function onPenUp (data) {
 }
 
 function getRecognizer (script, onResult) {
-  // eslint-disable-next-line no-undef
   return new HandwritingRecognition({
-    threshold: 0.90,
+    threshold: 0.85,
     script,
     onResult
   })
