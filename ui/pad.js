@@ -81,6 +81,11 @@ class WritingPad {
         } else {
           this.canvasContext.lineTo(p.x, p.y)
         }
+        if (this.options.showCoords) {
+          this.canvasContext.fillStyle = 'blue'
+          this.canvasContext.fillRect(p.x - 2, p.y - 2, 5, 5)
+          this.canvasContext.fillText(`(${p.x}. ${p.y})`, p.x + 10, p.y + 10)
+        }
       }
     }
     this.canvasContext.stroke()

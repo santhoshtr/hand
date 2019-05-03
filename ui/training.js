@@ -73,7 +73,13 @@ function renderSamples (script, pattern, itemData) {
     canvas.height = 500
     let pad = new WritingPad({
       canvas: canvas,
-      readonly: true
+      readonly: true,
+      showCoords: true,
+      strokeOptions: {
+        lineCap: 'round',
+        lineWidth: 2,
+        strokeStyle: '#009dec'
+      }
     })
     drawData(pad, samples[i])
     sampleElement.appendChild(checkbox)
