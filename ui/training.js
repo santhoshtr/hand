@@ -1,5 +1,216 @@
-/* global M, WritingPad */
-var scripts = []
+/* global M, Vue */
+const scripts = [
+  {
+    id: 'malayalam',
+    name: 'Malayalam',
+    source: 'src/data/malayalam.json'
+  },
+  {
+    id: 'tamil',
+    name: 'தமிழ்',
+    source: 'src/data/malayalam.json'
+  }
+]
+
+Vue.component('training-data', {
+  props: {
+    id: String,
+    name: String
+  },
+  template: '#training-data-template',
+  data: function () {
+    return { scriptdata: [] }
+  },
+  created () {
+    fetch(`src/data/${this.id}.json`).then(r => r.json()).then(data => { this.scriptdata = data })
+  },
+  methods: {
+    download: function (script) {
+      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.scriptdata, null, 2))
+      var downloadAnchorNode = document.createElement('a')
+      downloadAnchorNode.setAttribute('href', dataStr)
+      downloadAnchorNode.setAttribute('download', this.id + '.json')
+      document.body.appendChild(downloadAnchorNode) // required for firefox
+      downloadAnchorNode.click()
+      downloadAnchorNode.remove()
+      return false
+    },
+    addPattern: function (pattern) {
+    },
+    add: function (pattern) {
+      this.scriptdata[pattern].samples.push({
+        'strokes': []
+      })
+    },
+    remove: function (pattern, sampleIndex) {
+      this.scriptdata[pattern].samples.splice(sampleIndex, 1)
+    }
+  }
+})
+
+Vue.component('pattern-sample', {
+  props: {
+    sampleIndex: String,
+    sample: Object
+  },
+  template: '#pattern-sample-template',
+  data: function () {
+    return {
+      canvas: null,
+      canvasContext: null,
+      editable: !this.sample.strokes || !this.sample.strokes.length,
+      options: {
+        canvasWidth: document.body.clientWidth * 0.9,
+        canvasHeight: 500,
+        showCoords: true,
+        lineCap: 'round',
+        lineWidth: 2,
+        strokeStyle: '#009dec'
+      },
+      state: {
+        isDown: false,
+        timer: null,
+        lastPos: null,
+        stroke: [],
+        strokes: []
+      }
+    }
+  },
+  mounted () {
+    const canvasEl = this.$refs['pattern-sample-canvas']
+    this.canvas = canvasEl
+    this.canvasContext = canvasEl.getContext('2d')
+    this.canvasContext.lineCap = this.options.lineCap
+    this.canvasContext.lineWidth = this.options.lineWidth
+    this.canvasContext.strokeStyle = this.options.strokeStyle
+
+    this.canvasContext.clearRect(0, 0, canvasEl.width, canvasEl.height)
+    this.canvasContext.beginPath()
+    let strokes = this.sample.strokes
+    if (this.editable) {
+      this.listen(canvasEl)
+    }
+
+    for (let i = 0; i < strokes.length; i++) {
+      this.drawStroke(strokes[i])
+    }
+    this.canvasContext.stroke()
+  },
+  methods: {
+    drawStroke: function (stroke) {
+      for (let i = 0; i < stroke.length; i++) {
+        let p = stroke[i]
+        if (i === 0) {
+          this.canvasContext.moveTo(p.x, p.y)
+        } else {
+          this.canvasContext.lineTo(p.x, p.y)
+        }
+        if (this.options.showCoords) {
+          this.canvasContext.fillStyle = 'blue'
+          this.canvasContext.fillRect(p.x - 2, p.y - 2, 5, 5)
+          this.canvasContext.fillText(`(${p.x}. ${p.y})`, p.x + 10, p.y + 10)
+        }
+      }
+    },
+    listen: function () {
+      this.canvas.ontouchstart = this.canvas.onmousedown = (e) => { this.onmousedown(e) }
+      this.canvas.ontouchmove = this.canvas.onmousemove = (e) => { this.onmousemove(e) }
+      this.canvas.ontouchend = this.canvas.onmouseup = (e) => { this.onmouseup(e) }
+    },
+    onmousedown: function (e) {
+      let pos = this._getXY(e)
+      this.state.lastPos = pos
+      this.state.stroke = []
+      this.state.isDown = true
+      this.state.stroke.push(pos)
+      if (this.options.onPenDown) {
+        this.options.onPenDown()
+
+        if (this.state.timer) {
+          clearTimeout(this.state.timer)
+        }
+      }
+    },
+    onmousemove: function (e) {
+      if (!this.state.isDown) {
+        return
+      }
+      let pos = this._getXY(e)
+      this.state.stroke.push(pos)
+      this.canvasContext.beginPath()
+      this.canvasContext.moveTo(this.state.lastPos.x, this.state.lastPos.y)
+      this.canvasContext.lineTo(pos.x, pos.y)
+      this.canvasContext.stroke()
+      this.state.lastPos = pos
+    },
+    onmouseup: function (e) {
+      if (!this.state.isDown) {
+        return
+      }
+      this.state.isDown = false
+      const strokeData = {
+        stroke: this.stroke
+      //  box: this.getBoundingBox()
+      }
+      this.state.strokes.push(strokeData)
+      if (this.options.onPenUp) {
+        this.options.onPenUp(strokeData)
+      }
+      // if (data.box.x2 > this.canvas.width * 0.75) {
+      //   this.state.timer = setTimeout(this.pushSegment.bind(this, this.data), this.TIMEOUT)
+      // }
+    },
+    _getXY: function (event) {
+      const canvasEl = this.$refs['pattern-sample-canvas']
+      let rect = canvasEl.getBoundingClientRect()
+      if (event.type.indexOf('touch') >= 0) {
+        return {
+          x: event.targetTouches[0].clientX - rect.left,
+          y: event.targetTouches[0].clientY - rect.top
+        }
+      } else {
+        return {
+          x: event.clientX - rect.left,
+          y: event.clientY - rect.top
+        }
+      }
+    },
+    getBoundingBox: function () {
+      let minX = this.canvas.width
+      let minY = this.canvas.height
+      let maxX = 0
+      let maxY = 0
+      for (let i = 0; i < this.state.strokes.length; i++) {
+        let p = this.state.strokes[i]
+        if (p.x <= minX) {
+          minX = p.x
+        }
+        if (p.y <= minY) {
+          minY = p.y
+        }
+        if (p.x >= maxX) {
+          maxX = p.x
+        }
+        if (p.y >= maxY) {
+          maxY = p.y
+        }
+      }
+      return {
+        x1: minX,
+        y1: minY,
+        x2: maxX,
+        y2: maxY
+      }
+    }
+  }
+})
+
+const trainingApp = new Vue({
+  el: '#app',
+  data: {
+    scripts: scripts
+  }
+})
 
 function init () {
   var tabs = M.Tabs.init(document.querySelectorAll('.tabs'))
@@ -7,110 +218,6 @@ function init () {
   tabs.select('malayalam')
   var elems = document.querySelectorAll('.collapsible')
   M.Collapsible.init(elems, {})
-  loadScript('malayalam').then(() => renderData('malayalam'))
-  loadScript('tamil').then(() => renderData('tamil'))
-
-  Array.from(document.querySelectorAll('.download')).forEach(link => {
-    link.addEventListener('click', function (event) {
-      download(this.dataset.script)
-    })
-  })
-}
-
-function renderData (script) {
-  let scriptdata = scripts[script]
-  let collapsible = document.querySelectorAll(`#${script} > .collapsible`)[0]
-  for (let pattern in scriptdata) {
-    let item = document.createElement('li')
-    let header = document.createElement('div')
-    header.className = 'collapsible-header'
-    let icon = document.createElement('i')
-    icon.innerText = 'gesture'
-    icon.className = 'material-icons'
-    header.appendChild(icon)
-    header.appendChild(document.createTextNode(pattern))
-    item.appendChild(header)
-
-    let itemData = document.createElement('div')
-    itemData.className = 'collapsible-body'
-
-    renderSamples(script, pattern, itemData)
-    item.appendChild(itemData)
-
-    collapsible.appendChild(item)
-  }
-}
-
-function renderSamples (script, pattern, itemData) {
-  const scriptdata = scripts[script]
-  let samples = scriptdata[pattern].samples
-
-  let actions = document.createElement('div')
-  actions.className = 'actions'
-  let add = document.createElement('button')
-  add.className = 'actions-add btn waves-effect waves-light'
-  add.innerText = 'add'
-  actions.appendChild(add)
-  let remove = document.createElement('button')
-  remove.className = 'actions-remove btn waves-effect waves-light'
-  remove.innerText = 'remove'
-  actions.appendChild(remove)
-
-  itemData.appendChild(actions)
-
-  for (let i = 0; i < samples.length; i++) {
-    let sampleElement = document.createElement('label')
-    sampleElement.className = 'row'
-    let checkbox = document.createElement('input')
-    checkbox.type = 'checkbox'
-    checkbox.name = pattern
-    checkbox.value = i
-    let labelText = document.createElement('span')
-    labelText.innerText = 'Sample-' + i
-    let canvas = document.createElement('canvas')
-    canvas.className = 'yellow lighten-5 col s12'
-    canvas.width = document.body.clientWidth * 0.9
-    canvas.height = 500
-    let pad = new WritingPad({
-      canvas: canvas,
-      readonly: true,
-      showCoords: true,
-      strokeOptions: {
-        lineCap: 'round',
-        lineWidth: 2,
-        strokeStyle: '#009dec'
-      }
-    })
-    drawData(pad, samples[i])
-    sampleElement.appendChild(checkbox)
-    sampleElement.appendChild(labelText)
-    sampleElement.appendChild(canvas)
-    itemData.appendChild(sampleElement)
-  }
-}
-
-function drawData (pad, data) {
-  pad.setData(data.strokes)
-  pad.draw()
-}
-
-function download (script) {
-  var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(scripts[script], null, 2))
-  var downloadAnchorNode = document.createElement('a')
-  downloadAnchorNode.setAttribute('href', dataStr)
-  downloadAnchorNode.setAttribute('download', script + '.json')
-  document.body.appendChild(downloadAnchorNode) // required for firefox
-  downloadAnchorNode.click()
-  downloadAnchorNode.remove()
-  return false
-}
-
-function loadScript (script) {
-  return fetch(`src/data/${script}.json`).then(r => r.json())
-    .then(data => {
-      scripts[script] = data
-    })
-    .catch(e => console.error(`Failed loading ${script}`))
 }
 
 window.addEventListener('load', init)

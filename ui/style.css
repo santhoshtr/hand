@@ -14,7 +14,7 @@ body {
     flex-direction: column;
 }
 
-.naviagation {
+.navigation {
     background: #f4f5f6;
     border-bottom: .1rem solid #d1d1d1;
     display: flex;
