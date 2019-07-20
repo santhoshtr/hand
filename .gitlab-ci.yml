@@ -5,7 +5,7 @@ pages: # the job must be named pages
     - npm ci
     - npm run build
     - mkdir public
-    - mv dist ui training.html index.html public
+    - mv src dist ui training.html index.html public
   artifacts:
     paths:
       - public # artifact path must be /public for GitLab Pages to pick it up
