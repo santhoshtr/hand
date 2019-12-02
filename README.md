@@ -12,7 +12,7 @@ Since people write the letters in so many random ways, the curve matching should
 Try out
 -------
 
-https://thottingal.in/projects/hand/
+https://santhoshtr.gitlab.io/hand
 
 Training
 --------
