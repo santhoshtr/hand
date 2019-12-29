@@ -1,8 +1,8 @@
 {
-  "name": "mlhand",
+  "name": "hand",
   "version": "1.0.0",
-  "description": "Malayalam Handwriting recognition",
-  "main": "dist/mlhand.js",
+  "description": "Handwriting recognition",
+  "main": "dist/handwriting-recognition.js",
   "directories": {
     "lib": "lib"
   },
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/santhoshtr/hand.git"
+    "url": "git+ssh://git@gitlab.com/smc/handwriting.git"
   },
   "keywords": [
     "Malayalam"
@@ -24,9 +24,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/santhoshtr/hand/issues"
+    "url": "https://gitlab.com/smc/hand/issues"
   },
-  "homepage": "https://gitlab.com/santhoshtr/hand#readme",
+  "homepage": "https://gitlab.com/smc/hand#readme",
   "dependencies": {
     "curve-matcher": "^1.1.0",
     "simplify-js": "^1.2.3"
