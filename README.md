@@ -12,7 +12,7 @@ Since people write the letters in so many random ways, the curve matching should
 Try out
 -------
 
-https://smc.gitlab.io/hand
+https://smc.gitlab.io/handwriting
 
 Training
 --------
@@ -22,4 +22,4 @@ To add a shape that is not already supported, open the application in a desktop 
 Building the application
 ------------------------
 
-After checking out the source code. Run `npm install` to install all dependencies and building tools. Then run `npm run build`. You will see a dist folder created and production ready js library in it. Run `index.html` to see this in action.
+After checking out the source code. Run `npm install` to install all dependencies and building tools. Then run `npm run build`. You will see a dist folder created and production ready js library in it. Access `index.html` to see this in action.
