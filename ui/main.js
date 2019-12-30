@@ -66,6 +66,11 @@ function init () {
     pad.previous()
   }
 
+  document.getElementsByClassName('clear-all')[0].onclick = () => {
+    pad.clear()
+    document.getElementById('result').value = ''
+  }
+
   document.getElementsByClassName('language')[0].onchange = onLanguageChange
   document.body.onresize = initPad
 }
