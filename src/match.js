@@ -2,10 +2,8 @@ import {
   shapeSimilarity
 } from 'curve-matcher'
 import simplify from 'simplify-js'
-import malayalam from './data/malayalam.json'
-import tamil from './data/tamil.json'
+import scriptData from './scripts'
 
-const scriptData = { malayalam, tamil }
 const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
 const sortByScore = (a, b) => parseFloat(b.score) - parseFloat(a.score)
 const simpifyStrokes = (strokes) => strokes.map((stroke) => simplify(stroke, 5, true))

@@ -1,16 +1,5 @@
 /* global M, Vue */
-const scripts = [
-  {
-    id: 'malayalam',
-    name: 'Malayalam',
-    source: 'src/data/malayalam.json'
-  },
-  {
-    id: 'tamil',
-    name: 'தமிழ்',
-    source: 'src/data/malayalam.json'
-  }
-]
+import { malayalam, tamil } from '../src/scripts.js'
 
 Vue.component('training-data', {
   props: {
@@ -209,7 +198,7 @@ Vue.component('pattern-sample', {
 const trainingApp = new Vue({
   el: '#app',
   data: {
-    scripts: scripts
+    scripts: [ malayalam, tamil ]
   }
 })
 
