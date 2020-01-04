@@ -205,6 +205,7 @@ Vue.component('pattern-sample', {
   }
 })
 
+// eslint-disable-next-line no-unused-vars
 const trainingApp = new Vue({
   el: '#app',
   data: {
