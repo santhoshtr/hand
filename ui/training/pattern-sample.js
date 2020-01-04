@@ -1,68 +1,39 @@
-/* global M, Vue */
-import { malayalam, tamil } from '../src/scripts.js'
 
-Vue.component('training-data', {
-  props: {
-    id: String,
-    name: String
-  },
-  template: '#training-data-template',
-  data: function () {
-    return { scriptdata: [] }
-  },
-  created () {
-    fetch(`src/data/${this.id}.json`).then(r => r.json()).then(data => { this.scriptdata = data })
-  },
-  methods: {
-    download: function (script) {
-      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.scriptdata, null, 2))
-      var downloadAnchorNode = document.createElement('a')
-      downloadAnchorNode.setAttribute('href', dataStr)
-      downloadAnchorNode.setAttribute('download', this.id + '.json')
-      document.body.appendChild(downloadAnchorNode) // required for firefox
-      downloadAnchorNode.click()
-      downloadAnchorNode.remove()
-      return false
-    },
-    addPattern: function (pattern) {
-    },
-    add: function (pattern) {
-      this.scriptdata[pattern].samples.push({
-        'strokes': []
-      })
-    },
-    remove: function (pattern, sampleIndex) {
-      this.scriptdata[pattern].samples.splice(sampleIndex, 1)
-    }
-  }
-})
-
-Vue.component('pattern-sample', {
+export default {
   props: {
     sampleIndex: String,
     sample: Object
   },
-  template: '#pattern-sample-template',
-  data: function () {
-    return {
-      canvas: null,
-      canvasContext: null,
-      editable: !this.sample.strokes || !this.sample.strokes.length,
-      options: {
-        canvasWidth: document.body.clientWidth * 0.9,
-        canvasHeight: 500,
-        showCoords: true,
-        lineCap: 'round',
-        lineWidth: 2,
-        strokeStyle: '#009dec'
-      },
-      state: {
-        isDown: false,
-        timer: null,
-        lastPos: null,
-        stroke: [],
-        strokes: []
-      }
+  template: `<div class="z-depth-1 row">
+    <canvas ref="pattern-sample-canvas" class="col s11" v-bind:height="options.canvasHeight" v-bind:width="options.canvasWidth">
+    </canvas>
+    <div v-if="editable" class="actions right">
+        <button class="actions-remove btn waves-effect waves-light" @click="save( sampleIndex)"><i class="material-icons">save</i></button>
+        <button class="actions-remove btn waves-effect waves-light" @click="undo( sampleIndex)"><i class="material-icons">undo</i></button>
+        <button class="actions-remove btn waves-effect waves-light" @click="simpify( sampleIndex)"><i class="material-icons">timeline</i></button>
+    </div>
+  </div>`,
+  data: () => ({ canvas: null,
+    canvasContext: null,
+    options: {
+      canvasWidth: document.body.clientWidth * 0.9,
+      canvasHeight: 500,
+      showCoords: true,
+      lineCap: 'round',
+      lineWidth: 2,
+      strokeStyle: '#009dec'
+    },
+    state: {
+      isDown: false,
+      timer: null,
+      lastPos: null,
+      stroke: [],
+      strokes: []
+    }
+  }),
+  computed: {
+    editable: function () {
+      return !this.sample.strokes || !this.sample.strokes.length
     }
   },
   mounted () {
@@ -139,7 +110,7 @@ Vue.component('pattern-sample', {
       this.state.isDown = false
       const strokeData = {
         stroke: this.stroke
-      //  box: this.getBoundingBox()
+        //  box: this.getBoundingBox()
       }
       this.state.strokes.push(strokeData)
       if (this.options.onPenUp) {
@@ -192,22 +163,4 @@ Vue.component('pattern-sample', {
       }
     }
   }
-})
-
-// eslint-disable-next-line no-unused-vars
-const trainingApp = new Vue({
-  el: '#app',
-  data: {
-    scripts: [ malayalam, tamil ]
-  }
-})
-
-function init () {
-  var tabs = M.Tabs.init(document.querySelectorAll('.tabs'))
-  tabs = M.Tabs.getInstance(document.querySelectorAll('.tabs')[0])
-  tabs.select('malayalam')
-  var elems = document.querySelectorAll('.collapsible')
-  M.Collapsible.init(elems, {})
 }
-
-window.addEventListener('load', init)

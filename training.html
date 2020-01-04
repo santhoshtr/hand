@@ -27,60 +27,12 @@
             </div>
         </nav>
 
-
         <main>
-            <script type="text/x-template" id="training-data-template">
-                <div class="row" v-bind:id="id">
-                        <div class="row">
-                          <button class='btn download col s4'  @click="download"><i class="material-icons">file_download</i> Download {{name}} data</button>
-                          <button class='btn add-pattern col s4 offset-s3' @click="addPattern"><i class="material-icons">add</i>Add letter</button>
-                      </div>
-                      <ul class="collapsible">
-                        <li v-for="data,pattern in scriptdata">
-                            <div class="collapsible-header"><i class="material-icons">gesture</i>{{pattern}} <span class="badge">{{data.samples? data.samples.length: 0}}</span></div>
-                            <div class="collapsible-body">
-                                      <div class="row">
-                                        <button @click="add(pattern)" class="actions-add btn-floating waves-effect waves-light right"><i class="material-icons">add</i></button>
-                                    </div>
-                                    <div class="row" v-for="sample,sampleIndex in data.samples">
-                                    <button class="actions-remove btn-floating waves-effect waves-light right" @click="remove(pattern, sampleIndex)"><i class="material-icons">delete</i></button>
-                                <pattern-sample
-                                    v-bind:key="sampleIndex"
-                                    v-bind:id="sampleIndex"
-                                    v-bind:sample="sample"
-                                    class="pattern-sample">
-                                </pattern-sample>
-                                </div>
-                            </div>
-                      </li>
-                      </ul>
-                    </div>
-                </script>
-
-            <script type="text/x-template" id="pattern-sample-template">
-                <div class="z-depth-1 row">
-                    <canvas ref="pattern-sample-canvas" class="col s11" v-bind:height="options.canvasHeight" v-bind:width="options.canvasWidth"></canvas>
-                    <div v-if="editable" class="actions right">
-                            <button class="actions-remove btn waves-effect waves-light" @click="save( sampleIndex)"><i class="material-icons">save</i></button>
-                            <button class="actions-remove btn waves-effect waves-light" @click="undo( sampleIndex)"><i class="material-icons">undo</i></button>
-                            <button class="actions-remove btn waves-effect waves-light" @click="simpify( sampleIndex)"><i class="material-icons">timeline</i></button>
-                        </div>
-                    </div>
-                </script>
             <div class="row" id="app">
-                <div class="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s3" v-for="script in scripts"><a
-                                v-bind:href="'#'+script.id">{{script.name}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <training-data v-bind:key="script.id" v-bind:id="script.id" v-bind:name="script.name"
-                    v-for="script in scripts" class="training-data col s12 grey lighten-5">
-                </training-data>
+
             </div>
         </main>
-        <script type="module"  src="ui/training.js"></script>
+        <script type="module" src="ui/training/index.js"></script>
         <script src="https://unpkg.com/simplify-js@1.2.3/simplify.js"></script>
 
     </body>
