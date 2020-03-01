@@ -32,6 +32,10 @@ function onPenUp(data) {
   hwr.queue(data);
 }
 
+function onPadClear() {
+  hwr.reset();
+}
+
 function getRecognizer(script, onResult) {
   return new HandwritingRecognition({
     threshold: 0.85,
@@ -40,12 +44,17 @@ function getRecognizer(script, onResult) {
   });
 }
 
+function clear() {
+  pad.clear();
+  hwr.reset();
+}
+
 function initPad() {
   let canvas = document.getElementsByClassName("pad")[0];
   canvas.width = document.body.clientWidth;
   canvas.height = document.body.clientHeight * 0.4;
   // eslint-disable-next-line no-undef
-  pad = new WritingPad({ canvas, onPenDown, onPenUp });
+  pad = new WritingPad({ canvas, onPenDown, onPenUp, onPadClear });
 }
 
 function init() {
@@ -71,8 +80,7 @@ function init() {
   };
 
   document.getElementsByClassName("clear-all")[0].onclick = () => {
-    pad.clear();
-    hwr.reset();
+    clear();
     document.getElementById("result").value = "";
   };
 

@@ -32,6 +32,7 @@ class WritingPad {
   clear() {
     this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.data = [];
+    this.options.onPadClear && this.options.onPadClear();
   }
 
   pushSegment(segmentData) {
