@@ -1,4 +1,4 @@
-import PatternSample from './pattern-sample.js'
+import PatternSample from "./pattern-sample.js";
 
 export default {
   props: {
@@ -34,29 +34,34 @@ export default {
   data: () => ({
     scriptdata: []
   }),
-  created () {
-    fetch(`src/data/${this.id}.json`).then(r => r.json()).then(data => { this.scriptdata = data })
+  created() {
+    fetch(`src/data/${this.id}.json`)
+      .then(r => r.json())
+      .then(data => {
+        this.scriptdata = data;
+      });
   },
   methods: {
-    download: function (script) {
-      var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.scriptdata, null, 2))
-      var downloadAnchorNode = document.createElement('a')
-      downloadAnchorNode.setAttribute('href', dataStr)
-      downloadAnchorNode.setAttribute('download', this.id + '.json')
-      document.body.appendChild(downloadAnchorNode) // required for firefox
-      downloadAnchorNode.click()
-      downloadAnchorNode.remove()
-      return false
+    download: function(script) {
+      var dataStr =
+        "data:text/json;charset=utf-8," +
+        encodeURIComponent(JSON.stringify(this.scriptdata, null, 2));
+      var downloadAnchorNode = document.createElement("a");
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", this.id + ".json");
+      document.body.appendChild(downloadAnchorNode); // required for firefox
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+      return false;
     },
-    addPattern: function (pattern) {
-    },
-    add: function (pattern) {
+    addPattern: function(pattern) {},
+    add: function(pattern) {
       this.scriptdata[pattern].samples.push({
-        'strokes': []
-      })
+        strokes: []
+      });
     },
-    remove: function (pattern, sampleIndex) {
-      this.scriptdata[pattern].samples.splice(sampleIndex, 1)
+    remove: function(pattern, sampleIndex) {
+      this.scriptdata[pattern].samples.splice(sampleIndex, 1);
     }
   }
-}
+};

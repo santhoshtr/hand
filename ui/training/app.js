@@ -1,9 +1,9 @@
-import { malayalam, tamil } from '../../src/scripts.js'
-import TrainingData from './training-data.js'
+import { malayalam, tamil } from "../../src/scripts.js";
+import TrainingData from "./training-data.js";
 
 export default {
   data: () => ({
-    scripts: [ malayalam, tamil ]
+    scripts: [malayalam, tamil]
   }),
   template: `<div>
     <div class="col s12">
@@ -18,4 +18,4 @@ export default {
     </training-data>
   </div>`,
   components: { TrainingData }
-}
+};
