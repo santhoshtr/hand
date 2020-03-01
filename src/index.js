@@ -3,7 +3,7 @@ import MatchWorker from "worker-loader?inline!./worker.js";
 export default class HandwritingRecognition {
   constructor(options) {
     this.onResult = options.onResult;
-    this.threshold = options.threshold || 0.8;
+    this.threshold = options.threshold || 0.75;
     this.script = options.script;
     this.matchers = [];
     this.matcherIndex = 0;
@@ -17,6 +17,10 @@ export default class HandwritingRecognition {
       matcher.onmessage = message => this.onMatchResult(message.data);
       this.matchers.push(matcher);
     }
+  }
+
+  reset() {
+    this.requestQueue = [];
   }
 
   queue(stroke) {

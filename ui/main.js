@@ -72,6 +72,7 @@ function init() {
 
   document.getElementsByClassName("clear-all")[0].onclick = () => {
     pad.clear();
+    hwr.reset();
     document.getElementById("result").value = "";
   };
 
