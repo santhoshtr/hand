@@ -4,7 +4,7 @@ import MatchWorker from 'worker-loader?inline!./worker.js'
 export default class HandwritingRecognition {
   constructor (options) {
     this.onResult = options.onResult
-    this.threshold = options.threshold || 0.88
+    this.threshold = options.threshold || 0.80
     this.script = options.script
     this.matchers = []
     this.matcherIndex = 0
