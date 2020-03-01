@@ -28,23 +28,23 @@
   },
   "homepage": "https://gitlab.com/smc/hand#readme",
   "dependencies": {
-    "curve-matcher": "^1.1.0",
-    "simplify-js": "^1.2.3"
+    "curve-matcher": "^1.1.1",
+    "simplify-js": "^1.2.4"
   },
   "devDependencies": {
     "babel-preset-env": "1.7.0",
     "babel-register": "^6.26.0",
     "eslint": "^5.9.0",
     "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^8.0.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "mocha": "^5.2.0",
     "mocha-eslint": "^4.1.0",
-    "webpack": "^4.36.1",
-    "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
     "worker-loader": "^2.0.0"
   }
 }
