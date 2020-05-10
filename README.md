@@ -14,6 +14,8 @@ Try out
 
 https://smc.gitlab.io/handwriting
 
+![https://smc.gitlab.io/handwriting](./doc/ml-hwr.gif)
+
 Training
 --------
 
