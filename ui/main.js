@@ -10,6 +10,7 @@ function onResult(results) {
 
     for (let i = 1; i < Math.min(3, results.length); i++) {
       let button = document.createElement("button");
+      button.classList = "btn btn-smal";
       button.innerText = results[i].pattern;
       button.title = results[i].score;
       candidates.appendChild(button);
@@ -86,6 +87,9 @@ function init() {
 
   document.getElementsByClassName("language")[0].onchange = onLanguageChange;
   document.body.onresize = initPad;
+
+  const elems = document.querySelectorAll("select");
+  const nstances = M.FormSelect.init(elems, {});
 }
 
 window.addEventListener("load", init);

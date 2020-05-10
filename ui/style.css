@@ -11,44 +11,13 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
 }
 
-.navigation {
-    background: #f4f5f6;
-    border-bottom: .1rem solid #d1d1d1;
-    display: flex;
-    height: 3rem;
-    left: 0;
-    max-width: 100%;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-}
-
-.title {
-    font-size: 1.4em;
-    font-weight: bold;
-    margin: 4px;
-    align-items: center;
-    align-items: center;
-}
-
-.nav-list {
-    list-style: none;
-    margin: 4px;
-}
-
-.nav-item {
-    line-height: 2em;
-}
-
-.nav-item a{
-    text-decoration: none;
-    font-size: 1rem;
-}
+main {
+    flex: 1 0 auto;
+  }
 
 .container {
     position: absolute;
@@ -57,7 +26,6 @@ body {
 
 .pad {
     outline: 1px dotted #565656;
-    background-color: ivory;
     margin: 0;
     padding: 0;
     z-index: 1;
@@ -76,52 +44,11 @@ body {
     font-family: "Manjari", "Rachana", sans-serif;
     font-size: 2em;
     background-color: #fff;
-    color: steelblue;
     width: 100%;
-    margin-top: 3.2rem;
-    height: 150px;
+    height: 20vh;
 }
 
-.candidates {
-    padding: 10px;
-}
-
-.candidates button {
-    font-family: "Manjari", "Rachana", sans-serif;
-    margin: 0 5px;
-    font-size: 1.4em;
-    color: steelblue;
-    background-color: #fff;
-    border: 1px solid gray;
-    border-radius: 4px;
-    min-width: 1.5em;
-    min-height: 1.5em;
-    cursor: pointer;
-
-}
-
+.card,
 .tools {
-    display: flex;
-    flex-direction: row;
-}
-
-.tools button,
-.tools select {
-    height: 3em;
-}
-
-.tools .back {
-    flex-grow: 2;
-}
-
-.tools .space {
-    flex-grow: 7;
-}
-
-.tools .backspace {
-    flex-grow: 2;
-}
-
-.tools .language {
-    flex-grow: 1;
+    margin: 0;
 }
