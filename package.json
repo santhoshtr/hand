@@ -1,5 +1,5 @@
 {
-  "name": "hand",
+  "name": "handwriting",
   "version": "1.0.0",
   "description": "Handwriting recognition",
   "main": "dist/handwriting-recognition.js",
@@ -24,9 +24,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/smc/hand/issues"
+    "url": "https://gitlab.com/smc/handwriting/issues"
   },
-  "homepage": "https://gitlab.com/smc/hand#readme",
+  "homepage": "https://gitlab.com/smc/handwriting#readme",
   "dependencies": {
     "curve-matcher": "^1.1.1",
     "simplify-js": "^1.2.4"
