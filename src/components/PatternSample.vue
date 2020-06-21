@@ -1,20 +1,46 @@
+<template>
+  <v-sheet>
+    <v-toolbar flat v-if="editable">
+      <v-toolbar-items>
+        <v-btn @click="save" text color="success">
+          <v-icon>{{ mdiSave }}</v-icon
+          >Save
+        </v-btn>
+        <v-btn @click="clear" text color="primary">
+          <v-icon>{{ mdiDelete }}</v-icon
+          >Clear
+        </v-btn>
+        <v-btn @click="simplify" text color="primary">
+          <v-icon>{{ mdiWave }}</v-icon
+          >Simplify
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+
+    <canvas
+      ref="pattern-sample-canvas"
+      class="pattern-sample-canvas"
+      :height="options.canvasHeight"
+      :width="options.canvasWidth"
+    ></canvas>
+  </v-sheet>
+</template>
+
+<script>
+import { mdiSave, mdiDelete, mdiWave } from "@mdi/js";
+
 export default {
+  name: "PatternSample",
   props: {
     sampleIndex: String,
     sample: Object
   },
-  template: `<div class="z-depth-1 row">
-    <canvas ref="pattern-sample-canvas" class="col s11" v-bind:height="options.canvasHeight" v-bind:width="options.canvasWidth">
-    </canvas>
-    <div v-if="editable" class="actions right">
-        <button class="actions-remove btn waves-effect waves-light" @click="save( sampleIndex)"><i class="material-icons">save</i></button>
-        <button class="actions-remove btn waves-effect waves-light" @click="undo( sampleIndex)"><i class="material-icons">undo</i></button>
-        <button class="actions-remove btn waves-effect waves-light" @click="simpify( sampleIndex)"><i class="material-icons">timeline</i></button>
-    </div>
-  </div>`,
   data: () => ({
     canvas: null,
     canvasContext: null,
+    mdiSave,
+    mdiDelete,
+    mdiWave,
     options: {
       canvasWidth: document.body.clientWidth * 0.9,
       canvasHeight: 500,
@@ -32,7 +58,7 @@ export default {
     }
   }),
   computed: {
-    editable: function() {
+    editable() {
       return !this.sample.strokes || !this.sample.strokes.length;
     }
   },
@@ -109,7 +135,7 @@ export default {
       this.canvasContext.stroke();
       this.state.lastPos = pos;
     },
-    onmouseup: function(e) {
+    onmouseup: function() {
       if (!this.state.isDown) {
         return;
       }
@@ -170,3 +196,9 @@ export default {
     }
   }
 };
+</script>
+<style lang="less">
+.pattern-sample-canvas {
+  background-color: #fffde7;
+}
+</style>
