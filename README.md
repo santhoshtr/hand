@@ -9,6 +9,8 @@ The core logic of recognition is curve matching. We have a saved version of curv
 
 Since people write the letters in so many random ways, the curve matching should take care of these variations. Scaling up or down, rotation, distortions in the curve, some amount of flexibility for errors etc. For this kind of curve matching we use https://github.com/chanind/curve-matcher which is a https://en.wikipedia.org/wiki/Procrustes_analysis based curve matching implementation.
 
+Here is a blog post explaining this in detail: [Procrustes Analysis Based Handwriting Recognition](https://thottingal.in/blog/2020/02/29/procrustes-analysis-based-handwriting-recognition/)
+
 Try out
 -------
 
