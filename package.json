@@ -9,43 +9,44 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test",
-    "lint": "vue-cli-service lint"
+    "test:unit": "NODE_ENV=test mocha",
+    "lint": "vue-cli-service lint",
+    "test": "npm run test:unit"
   },
   "main": "dist/handwriting-recognition.js",
   "dependencies": {
-    "@mdi/js": "^5.3.45",
+    "@mdi/js": "^5.6.55",
     "curve-matcher": "^1.1.1",
     "simplify-js": "^1.2.4",
-    "vue": "^2.6.10",
-    "vue-router": "^3.3.4",
-    "vuetify": "^2.2.11"
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.4",
+    "vuetify": "^2.3.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.4.1",
-    "@vue/cli-plugin-eslint": "^4.4.1",
-    "@vue/cli-plugin-unit-jest": "^4.4.1",
-    "@vue/cli-service": "^4.4.1",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.9.0",
+    "@vue/cli-plugin-babel": "^4.5.6",
+    "@vue/cli-plugin-eslint": "^4.5.6",
+    "@vue/cli-service": "^4.5.6",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/test-utils": "^1.0.3",
+    "@vue/test-utils": "^1.1.0",
     "babel-eslint": "^10.1.0",
-    "babel-preset-env": "1.7.0",
-    "babel-register": "^6.26.0",
     "core-js": "^3.6.5",
-    "eslint": "^7.0.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^5.0.0",
-    "less-loader": "^6.1.1",
-    "mocha": "^5.2.0",
-    "mocha-eslint": "^4.1.0",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.0",
+    "less-loader": "^6.2.0",
+    "mocha": "^8.1.3",
+    "mocha-eslint": "^6.0.0",
     "prettier": "^1.19.1",
-    "sass": "^1.19.0",
+    "sass": "^1.26.11",
     "sass-loader": "^8.0.0",
-    "vue-cli-plugin-vuetify": "^2.0.5",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.3.0",
-    "worker-loader": "^2.0.0"
+    "vue-cli-plugin-vuetify": "^2.0.7",
+    "vue-template-compiler": "^2.6.12",
+    "vuetify-loader": "^1.6.0",
+    "worker-loader": "^3.0.3"
   },
   "bugs": {
     "url": "https://gitlab.com/smc/handwriting/issues"
@@ -58,6 +59,11 @@
     "Malayalam"
   ],
   "license": "MIT",
+  "mocha": {
+    "recursive": true,
+    "timeout": 2000,
+    "require": "@babel/register"
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@gitlab.com/smc/handwriting.git"

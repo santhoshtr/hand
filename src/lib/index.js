@@ -1,4 +1,4 @@
-import MatchWorker from "worker-loader?inline!./worker.js";
+import MatchWorker from "worker-loader!./worker.js";
 
 export default class HandwritingRecognition {
   constructor(options) {
