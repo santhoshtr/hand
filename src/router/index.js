@@ -3,7 +3,6 @@ import Router from "vue-router";
 
 const routerOptions = [
   { path: "/", component: "Home" },
-  { path: "/training", component: "Training" },
   { path: "/about", component: "About" }
 ];
 

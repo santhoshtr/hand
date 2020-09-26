@@ -6,9 +6,6 @@
       >
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn to="training" text>
-          Training
-        </v-btn>
         <v-btn href="https://gitlab.com/smc/handwriting" target="_blank" text>
           Source code
         </v-btn>
