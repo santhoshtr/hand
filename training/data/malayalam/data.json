@@ -1,0 +1,160 @@
+{
+    "language": {
+        "code": "ml",
+        "name": "മലയാളം"
+    },
+    "data": [
+        {
+            "letter": "0",
+            "samples": [
+                "0.svg"
+            ]
+        },
+        {
+            "letter": "1",
+            "samples": [
+                "1.svg"
+            ]
+        },
+        {
+            "letter": "2",
+            "samples": [
+                "2.svg"
+            ]
+        },
+        {
+            "letter": "3",
+            "samples": [
+                "3.svg"
+            ]
+        },
+        {
+            "letter": "4",
+            "samples": [
+                "4.svg"
+            ]
+        },
+        {
+            "letter": "5",
+            "samples": [
+                "5.svg",
+                "5-parts.svg"
+            ]
+        },
+        {
+            "letter": "6",
+            "samples": [
+                "6.svg"
+            ]
+        },
+        {
+            "letter": "7",
+            "samples": [
+                "7.svg",
+                "7-with-cross.svg"
+            ]
+        },
+        {
+            "letter": "8",
+            "samples": [
+                "8.svg"
+            ]
+        },
+        {
+            "letter": "9",
+            "samples": [
+                "9.svg"
+            ]
+        },
+        {
+            "letter": "ട",
+            "samples": [
+                "ട.svg"
+            ]
+        },
+        {
+            "letter": "ഠ",
+            "samples": [
+                "0.svg"
+            ]
+        },
+        {
+            "letter": "ത",
+            "samples": [
+                "ത.svg"
+            ]
+        },
+        {
+            "letter": "തു",
+            "samples": [
+                "തു.svg"
+            ]
+        },
+        {
+            "letter": "ദ",
+            "samples": [
+                "ദ.svg"
+            ]
+        },
+        {
+            "letter": "ഥ",
+            "samples": [
+                "ഥ.svg"
+            ]
+        },
+        {
+            "letter": "ധ",
+            "samples": [
+                "ധ.svg"
+            ]
+        },
+        {
+            "letter": "ന",
+            "samples": [
+                "ന.svg"
+            ]
+        },
+        {
+            "letter": "ൻ",
+            "samples": [
+                "ൻ.svg"
+            ]
+        },
+        {
+            "letter": "ം",
+            "samples": [
+                "0.svg"
+            ]
+        },
+        {
+            "letter": "o",
+            "samples": [
+                "0.svg"
+            ]
+        },
+        {
+            "letter": "O",
+            "samples": [
+                "0.svg"
+            ]
+        },
+        {
+            "letter": "s",
+            "samples": [
+                "ട.svg"
+            ]
+        },
+        {
+            "letter": "Z",
+            "samples": [
+                "z.svg"
+            ]
+        },
+        {
+            "letter": "z",
+            "samples": [
+                "z.svg"
+            ]
+        }
+    ]
+}

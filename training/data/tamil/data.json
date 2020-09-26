@@ -1,0 +1,39 @@
+{
+    "language": {
+        "code": "ta",
+        "name": "தமிழ்"
+    },
+    "data": [
+        {
+            "letter": "1",
+            "samples": [
+                "1.svg"
+            ]
+        },
+        {
+            "letter": "2",
+            "samples": [
+                "2.svg"
+            ]
+        },
+        {
+            "letter": "7",
+            "samples": [
+                "7.svg",
+                "7-with-cross.svg"
+            ]
+        },
+        {
+            "letter": "Z",
+            "samples": [
+                "z.svg"
+            ]
+        },
+        {
+            "letter": "z",
+            "samples": [
+                "z.svg"
+            ]
+        }
+    ]
+}
