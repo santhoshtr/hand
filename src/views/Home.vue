@@ -44,13 +44,13 @@
               </v-list-item>
             </v-list>
           </v-menu>
-          <v-btn text class="col-4" @click="space">
+          <v-btn text class="col-3" @click="space">
             <v-icon>{{ mdiKeyboardSpace }}</v-icon>
           </v-btn>
           <v-btn text class="col-2" @click="clear">
             <v-icon>{{ mdiBroom }}</v-icon>
           </v-btn>
-          <v-btn text class="col-2" @click="backspace">
+          <v-btn icon class="col-2" @click="backspace">
             <v-icon>{{ mdiBackspace }}</v-icon>
           </v-btn>
         </v-toolbar-items>
