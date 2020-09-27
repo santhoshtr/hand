@@ -85,6 +85,6 @@ if __name__ == "__main__":
     result = main(options)
     if options.output_file:
         with open(options.output_file, 'w') as outfile:
-            json.dump(result, outfile, indent=4)
+            json.dump(result, outfile, indent=4, ensure_ascii=False)
     else:
-        print(json.dumps(result, indent=4))
+        print(json.dumps(result, indent=4, ensure_ascii=False))
