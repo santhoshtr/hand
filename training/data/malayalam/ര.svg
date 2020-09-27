@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="1332.08" width="1594.403">
+    <defs>
+        <filter height="1.5" width="1.5" y="-.25" x="-.25" id="a" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="5" in="SourceAlpha" result="result1"/>
+            <feComposite operator="arithmetic" k2="3.2" k1="-1" k4="-2" result="result3" in2="result1"/>
+            <feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 10 0" result="result2"/>
+            <feComposite result="fbSourceGraphic" in="SourceGraphic" operator="out" in2="result2"/>
+            <feBlend mode="multiply" in="result1" in2="fbSourceGraphic" result="result91"/>
+            <feBlend mode="screen" in="fbSourceGraphic" in2="result91"/>
+        </filter>
+    </defs>
+    <path d="M293.408 339.595C131.044 159.138 85.621-2.827 112.828-137.468c102.395-506.714 1233.488-626.434 1031.45 111.565C960 480 524.92 440.276 549.036-34.199c8.868-174.49 143.92-362.686 487.315-384.757" fill="none" stroke="#000" stroke-width="127.372" stroke-linecap="round" stroke-linejoin="round" filter="url(#a)" transform="translate(160.28 770.471)"/>
+</svg>

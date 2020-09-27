@@ -13,7 +13,8 @@
         {
             "letter": "1",
             "samples": [
-                "1.svg"
+                "1.svg",
+                "1-straight.svg"
             ]
         },
         {
@@ -67,6 +68,37 @@
             ]
         },
         {
+            "letter": "ക",
+            "samples": [
+                "ക.svg"
+            ]
+        },
+        {
+            "letter": "ഗ",
+            "samples": [
+                "ഗ.svg"
+            ]
+        },
+        {
+            "letter": "ഗു",
+            "samples": [
+                "ഗു.svg"
+            ]
+        },
+        {
+            "letter": "ച",
+            "samples": [
+                "ച.svg"
+            ]
+        },
+        {
+            "letter": "ജ",
+            "samples": [
+                "ജ.svg",
+                "ജ-alt1.svg"
+            ]
+        },
+        {
             "letter": "ട",
             "samples": [
                 "ട.svg"
@@ -115,9 +147,161 @@
             ]
         },
         {
+            "letter": "നു",
+            "samples": [
+                "നു.svg"
+            ]
+        },
+        {
             "letter": "ൻ",
             "samples": [
                 "ൻ.svg"
+            ]
+        },
+        {
+            "letter": "പ",
+            "samples": [
+                "പ.svg"
+            ]
+        },
+        {
+            "letter": "ബ",
+            "samples": [
+                "ബ.svg"
+            ]
+        },
+        {
+            "letter": "മ",
+            "samples": [
+                "മ.svg"
+            ]
+        },
+        {
+            "letter": "യ",
+            "samples": [
+                "യ.svg"
+            ]
+        },
+        {
+            "letter": "ര",
+            "samples": [
+                "ര.svg"
+            ]
+        },
+        {
+            "letter": "രു",
+            "samples": [
+                "രു.svg"
+            ]
+        },
+        {
+            "letter": "രൂ",
+            "samples": [
+                "രൂ.svg"
+            ]
+        },
+        {
+            "letter": "ല",
+            "samples": [
+                "ല.svg"
+            ]
+        },
+        {
+            "letter": "സ",
+            "samples": [
+                "സ.svg"
+            ]
+        },
+        {
+            "letter": "ശ",
+            "samples": [
+                "ശ.svg"
+            ]
+        },
+        {
+            "letter": "ഷ",
+            "samples": [
+                "ഷ.svg",
+                "ഷ-alt1.svg"
+            ]
+        },
+        {
+            "letter": "ഹ",
+            "samples": [
+                "ഹ.svg"
+            ]
+        },
+        {
+            "letter": "ള",
+            "samples": [
+                "ള.svg"
+            ]
+        },
+        {
+            "letter": "ഴ",
+            "samples": [
+                "ഴ.svg"
+            ]
+        },
+        {
+            "letter": "ർ",
+            "samples": [
+                "ർ.svg"
+            ]
+        },
+        {
+            "letter": "്",
+            "samples": [
+                "്.svg"
+            ]
+        },
+        {
+            "letter": "ാ",
+            "samples": [
+                "ാ.svg"
+            ]
+        },
+        {
+            "letter": "ി",
+            "samples": [
+                "ി.svg",
+                "7.svg"
+            ]
+        },
+        {
+            "letter": "ീ",
+            "samples": [
+                "ീ.svg"
+            ]
+        },
+        {
+            "letter": "ു",
+            "samples": [
+                "ു.svg"
+            ]
+        },
+        {
+            "letter": "ൂ",
+            "samples": [
+                "ൂ.svg"
+            ]
+        },
+        {
+            "letter": "െ",
+            "samples": [
+                "െ.svg"
+            ]
+        },
+        {
+            "letter": "േ",
+            "samples": [
+                "േ.svg"
+            ]
+        },
+        {
+            "letter": "ൗ",
+            "samples": [
+                "ൗ.svg"
             ]
         },
         {
@@ -139,6 +323,19 @@
             ]
         },
         {
+            "letter": "I",
+            "samples": [
+                "1-straight.svg"
+            ]
+        },
+        {
+            "letter": "l",
+            "samples": [
+                "1.svg",
+                "1-straight.svg"
+            ]
+        },
+        {
             "letter": "s",
             "samples": [
                 "ട.svg"
@@ -154,6 +351,24 @@
             "letter": "z",
             "samples": [
                 "z.svg"
+            ]
+        },
+        {
+            "letter": "|",
+            "samples": [
+                "1-straight.svg"
+            ]
+        },
+        {
+            "letter": "/",
+            "samples": [
+                "1-straight.svg"
+            ]
+        },
+        {
+            "letter": "\\",
+            "samples": [
+                "1-straight.svg"
             ]
         }
     ]
