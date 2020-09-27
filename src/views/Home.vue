@@ -8,6 +8,7 @@
           v-model="textValue"
           :value="textValue"
           clearable
+          height="80px"
         ></v-textarea>
       </v-col>
     </v-row>
