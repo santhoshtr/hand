@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app flat>
       <v-toolbar-title @click.stop="$router.push('/')" style="cursor:pointer;"
         >Handwriting Recognition</v-toolbar-title
       >

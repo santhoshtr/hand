@@ -5,7 +5,7 @@ export default class WritingPad {
     let strokeOptions = options.strokeOptions || {
       lineCap: "round",
       lineWidth: 4,
-      strokeStyle: "#4169E1" // Royal Blue color.
+      strokeStyle: "#0277BD" // Royal Blue color.
     };
     this.options = options;
     this.canvasContext = this.canvas.getContext("2d");

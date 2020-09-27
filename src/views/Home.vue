@@ -4,49 +4,53 @@
       <v-col cols="12" md="12">
         <v-textarea
           class="pad-text"
-          flat
+          outlined
           v-model="textValue"
           :value="textValue"
           clearable
-          height="80px"
+          height="200px"
         ></v-textarea>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12" sm="9" xs="12" class="ma-0 pa-2">
+    <v-sheet elevation="6" dark class="pad-container row ma-0 pa-0">
+      <v-toolbar dense flat class="suggestions-toolbar">
+        <div v-if="!candidates.length">Please write in the below pad</div>
         <v-btn
           v-for="(candiate, index) in candidates"
           :key="index"
           text
           :title="candiate.score"
-          large
+          @click="useCandidate(candiate.pattern)"
           >{{ candiate.pattern }}</v-btn
         >
-      </v-col>
-      <v-col cols="12" sm="3" xs="12" class="ma-0 pa-2">
-        <v-select
-          placeholder="Select script"
-          label="Script"
-          v-model="script"
-          class="ma-0 pa-2"
-          :items="scripts"
-        ></v-select>
-      </v-col>
-    </v-row>
-    <v-sheet class="pad-container row ma-1 pa-1">
+      </v-toolbar>
       <canvas ref="pad" class="pad col-12"></canvas>
-      <v-toolbar dense class="pad-toolbar">
-        <v-toolbar-items class="row">
-          <v-btn icon class="col-2" @click="back">
+      <v-toolbar dense flat class="pad-toolbar">
+        <v-toolbar-items class="row ma-0 pa-0">
+          <v-btn icon text class="col-2" @click="back">
             <v-icon>{{ mdiArrowLeft }}</v-icon>
           </v-btn>
-          <v-btn class="col-2" @click="clear">
-            <v-icon>{{ mdiBroom }}</v-icon>
-          </v-btn>
-          <v-btn class="col-6" @click="space">
+          <v-menu dark offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn flat text v-bind="attrs" v-on="on" class="col-2">
+                <v-icon>
+                  {{ mdiTranslate }}
+                </v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item v-for="script in scripts" :key="script.value">
+                <v-list-item-title>{{ script.text }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          <v-btn text class="col-4" @click="space">
             <v-icon>{{ mdiKeyboardSpace }}</v-icon>
           </v-btn>
-          <v-btn class="col-2" @click="backspace">
+          <v-btn text class="col-2" @click="clear">
+            <v-icon>{{ mdiBroom }}</v-icon>
+          </v-btn>
+          <v-btn text class="col-2" @click="backspace">
             <v-icon>{{ mdiBackspace }}</v-icon>
           </v-btn>
         </v-toolbar-items>
@@ -59,6 +63,7 @@ import {
   mdiBackspace,
   mdiArrowLeft,
   mdiKeyboardSpace,
+  mdiTranslate,
   mdiBroom
 } from "@mdi/js";
 import WritingPad from "../lib/pad";
@@ -68,7 +73,6 @@ export default {
   name: "Handwriting",
   data: () => ({
     pad: null,
-    textValue: "",
     script: "malayalam",
     scripts: [
       { value: "malayalam", text: "മലയാളം" },
@@ -76,8 +80,10 @@ export default {
     ],
     mdiKeyboardSpace,
     candidates: [],
+    recognitions: [],
     mdiArrowLeft,
     mdiBackspace,
+    mdiTranslate,
     mdiBroom
   }),
   computed: {
@@ -87,6 +93,9 @@ export default {
         script: this.script,
         onResult: this.onResult
       });
+    },
+    textValue() {
+      return this.recognitions.join("");
     }
   },
   mounted: function() {
@@ -102,7 +111,7 @@ export default {
     init() {
       const canvas = this.$refs.pad;
       canvas.width = document.body.clientWidth;
-      canvas.height = 320;
+      canvas.height = 240;
       this.pad = new WritingPad({
         canvas,
         onPenDown: this.onPenDown,
@@ -118,18 +127,22 @@ export default {
       this.recognizer.reset();
     },
     onResult: function(results) {
-      console.log({ results });
+      console.table(results);
       if (results?.length) {
         const result = results[0];
-        this.textValue += result.pattern;
-        this.candidates = results.slice(1);
+        this.recognitions.push(result.pattern);
+        this.candidates = results;
       }
     },
+    useCandidate: function(candidate) {
+      this.recognitions.pop();
+      this.recognitions.push(candidate);
+    },
     space: function() {
-      this.textValue += " ";
+      this.recognitions.push(" ");
     },
     backspace: function() {
-      this.textValue = this.textValue.slice(0, -1);
+      this.recognitions.pop();
     },
     back: function() {
       this.pad.previous();
@@ -137,6 +150,7 @@ export default {
     clear: function() {
       this.pad.clear();
       this.recognizer.reset();
+      this.candidates = [];
     }
   }
 };
@@ -151,12 +165,23 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 368px;
+  height: 336px; // canvas height + 48+ 48
   .pad {
     position: absolute;
-    bottom: 0;
-    background-color: #fffde7;
+    bottom: 48px;
+    left: 0;
+    right: 0;
+    opacity: 0.95;
+    padding: 0;
+    background-color: #37474f;
+    cursor: url("../assets/pencil.png"), auto;
     touch-action: none;
+  }
+  .suggestions-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   .pad-toolbar {
     position: absolute;
