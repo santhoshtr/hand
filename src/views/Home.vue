@@ -12,7 +12,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" sm="9" xs="12">
+      <v-col cols="12" sm="9" xs="12" class="ma-0 pa-2">
         <v-btn
           v-for="(candiate, index) in candidates"
           :key="index"
@@ -22,16 +22,17 @@
           >{{ candiate.pattern }}</v-btn
         >
       </v-col>
-      <v-col cols="12" sm="3" xs="12">
+      <v-col cols="12" sm="3" xs="12" class="ma-0 pa-2">
         <v-select
           placeholder="Select script"
           label="Script"
           v-model="script"
+          class="ma-0 pa-2"
           :items="scripts"
         ></v-select>
       </v-col>
     </v-row>
-    <v-sheet class="pad-container row ma-0 pa-0">
+    <v-sheet class="pad-container row ma-1 pa-1">
       <canvas ref="pad" class="pad col-12"></canvas>
       <v-toolbar dense class="pad-toolbar">
         <v-toolbar-items class="row">
@@ -100,7 +101,7 @@ export default {
     init() {
       const canvas = this.$refs.pad;
       canvas.width = document.body.clientWidth;
-      canvas.height = 400;
+      canvas.height = 360;
       this.pad = new WritingPad({
         canvas,
         onPenDown: this.onPenDown,
@@ -149,7 +150,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 448px;
+  height: 360px;
   .pad {
     position: absolute;
     bottom: 0;
