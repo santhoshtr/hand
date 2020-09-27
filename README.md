@@ -21,7 +21,8 @@ https://smc.gitlab.io/handwriting
 Training
 --------
 
-To add a shape that is not already supported, open the application in a desktop browser. Also open the browser debugger. Draw the shape in the pad, and note down the curve representation printed in the console. This representation is array of coordinates. Copy that and add to src/malayalam.json or src/tamil.json file just like any other entry in that file. Remember to re-build the application and refresh the webpage to see the new shape being recognised.
+To add a letter, prepare an svg with the corresponding path. Add that to the training directory along with existing svgs. Edit ehe data.json file there and give the svg file name and letter.
+Then run `make` in the training directory. Now on wards any strokes similar to the path in svg will be recognized. Note the direction of stroke in the svg is important. You can also add any number of different writing styles as separate SVG files.
 
 Building the application
 ------------------------
