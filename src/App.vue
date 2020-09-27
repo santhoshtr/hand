@@ -29,5 +29,7 @@ export default {
 <style>
 #app {
   font-family: Lato, Manjari, sans-serif;
+  height: 100%;
+  height: -webkit-fill-available;
 }
 </style>

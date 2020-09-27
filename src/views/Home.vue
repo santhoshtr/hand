@@ -102,7 +102,7 @@ export default {
     init() {
       const canvas = this.$refs.pad;
       canvas.width = document.body.clientWidth;
-      canvas.height = 360;
+      canvas.height = 320;
       this.pad = new WritingPad({
         canvas,
         onPenDown: this.onPenDown,
@@ -147,11 +147,11 @@ export default {
   font-family: Lato, Manjari, sans-serif;
 }
 .pad-container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 360px;
+  height: 368px;
   .pad {
     position: absolute;
     bottom: 0;
