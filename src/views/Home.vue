@@ -151,6 +151,7 @@ export default {
       this.pad.clear();
       this.recognizer.reset();
       this.candidates = [];
+      this.recognitions = [];
     }
   }
 };
