@@ -156,6 +156,7 @@ export default {
     position: absolute;
     bottom: 0;
     background-color: #fffde7;
+    touch-action: none;
   }
   .pad-toolbar {
     position: absolute;

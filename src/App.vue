@@ -29,6 +29,5 @@ export default {
 <style>
 #app {
   font-family: Lato, Manjari, sans-serif;
-  overflow: hidden;
 }
 </style>
