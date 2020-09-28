@@ -14,9 +14,9 @@ Here is a blog post explaining this in detail: [Procrustes Analysis Based Handwr
 Try out
 -------
 
-https://smc.gitlab.io/handwriting
+https://handwriting.smc.org.in/
 
-![https://smc.gitlab.io/handwriting](./doc/ml-hwr.gif)
+![https://handwriting.smc.org.in/](./doc/ml-hwr.gif)
 
 Training
 --------
