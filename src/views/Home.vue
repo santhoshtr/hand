@@ -159,7 +159,7 @@ export default {
 <style lang="less">
 .pad-text {
   font-size: 1.5em;
-  font-family: Lato, Manjari, sans-serif;
+  font-family: "Inter", "Manjari", sans-serif;
 }
 .pad-container {
   position: fixed;

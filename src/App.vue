@@ -27,8 +27,10 @@ export default {
 };
 </script>
 <style>
+@import url("https://smc.org.in/fonts/manjari.css");
+@import url("https://rsms.me/inter/inter.css");
 #app {
-  font-family: Lato, Manjari, sans-serif;
+  font-family: "Inter", "Manjari", sans-serif;
   height: 100%;
   height: -webkit-fill-available;
 }
