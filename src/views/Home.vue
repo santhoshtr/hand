@@ -32,7 +32,7 @@
           </v-btn>
           <v-menu dark offset-y>
             <template v-slot:activator="{ on, attrs }">
-              <v-btn flat text v-bind="attrs" v-on="on" class="col-2">
+              <v-btn text v-bind="attrs" v-on="on" class="col-2">
                 <v-icon>
                   {{ mdiTranslate }}
                 </v-icon>
