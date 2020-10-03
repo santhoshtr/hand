@@ -125,6 +125,31 @@
             ]
         },
         {
+            "letter": "കു",
+            "samples": [
+                "കു.svg"
+            ]
+        },
+        {
+            "letter": "കൂ",
+            "samples": [
+                "കൂ-1.svg",
+                "കൂ-2.svg"
+            ]
+        },
+        {
+            "letter": "കൃ",
+            "samples": [
+                "കൃ.svg"
+            ]
+        },
+        {
+            "letter": "ക്ക",
+            "samples": [
+                "ക്ക.svg"
+            ]
+        },
+        {
             "letter": "ക്ത",
             "samples": [
                 "ക്ത.svg"
@@ -161,6 +186,13 @@
             ]
         },
         {
+            "letter": "ച്ച",
+            "samples": [
+                "ച്ച-1.svg",
+                "ച്ച-2.svg"
+            ]
+        },
+        {
             "letter": "ജ",
             "samples": [
                 "ജ.svg",
@@ -194,6 +226,7 @@
         {
             "letter": "ഠ",
             "samples": [
+                "ഠ.svg",
                 "0.svg"
             ]
         },
@@ -330,6 +363,13 @@
             ]
         },
         {
+            "letter": "പു",
+            "samples": [
+                "പു.svg",
+                "പു-multistroke.svg"
+            ]
+        },
+        {
             "letter": "പ്പ",
             "samples": [
                 "പ്പ.svg"
@@ -460,7 +500,8 @@
         {
             "letter": "ള",
             "samples": [
-                "ള.svg"
+                "ള.svg",
+                "ള-alt1.svg"
             ]
         },
         {
@@ -551,6 +592,7 @@
         {
             "letter": "ം",
             "samples": [
+                "ഠ.svg",
                 "0.svg"
             ]
         },
@@ -564,13 +606,15 @@
         {
             "letter": "o",
             "samples": [
-                "0.svg"
+                "0.svg",
+                "ഠ.svg"
             ]
         },
         {
             "letter": "O",
             "samples": [
-                "0.svg"
+                "0.svg",
+                "ഠ.svg"
             ]
         },
         {
