@@ -32,13 +32,14 @@ export default class Match {
 
     strokes = Array.isArray(strokes[0]) ? strokes : [strokes];
 
-    for (let key in this.scriptData) {
-      let score = this.matchLetter(strokes, this.scriptData[key].samples, key);
+    // Match each ligature data in the scriptData against the current drawn strokes
+    for (let ligature in this.scriptData) {
+      let score = this.matchLigatue(strokes, ligature);
       if (score) {
-        candidates.push({ pattern: key, score });
+        candidates.push({ pattern: ligature, score });
         // Good score. Stop here, ignore all other low score candidates.
         if (score > this.goodEnoughScore) {
-          candidates = [{ pattern: key, score }];
+          candidates = [{ pattern: ligature, score }];
           break;
         }
       }
@@ -50,11 +51,13 @@ export default class Match {
   /**
    *
    * @param {*} letterData
-   * @param {*} samples
-   * @param {string} key
+   * @param {string} ligature
    * @returns {number}
    */
-  matchLetter(letterData, samples, key) {
+  matchLigatue(letterData, ligature) {
+    const samples = this.scriptData[ligature].samples;
+    // A ligature can be written in multiple ways. So the trained data
+    // will have multiple samples.
     for (let i = 0; i < samples.length; i++) {
       const sample = samples[i];
       // Check if number of strokes match.
@@ -63,8 +66,8 @@ export default class Match {
       }
       let strokeScores = [];
       const matching = letterData.every((stroke, index) => {
-        console.debug(`Trying: ${key}`);
-        const score = this.match(stroke, sample.strokes[index]);
+        console.debug(`Trying: ${ligature}`);
+        const score = this.matchPaths(stroke, sample.strokes[index]);
         if (score >= this.threshold) {
           strokeScores.push(score);
           return true;
@@ -86,7 +89,7 @@ export default class Match {
    * @param {import("curve-matcher").Point[]} candidatePath
    * @returns {number}
    */
-  match(path, candidatePath) {
+  matchPaths(path, candidatePath) {
     const tolerance = 5;
     const highQuality = true;
 
