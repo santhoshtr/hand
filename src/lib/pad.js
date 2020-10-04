@@ -48,11 +48,11 @@ export default class WritingPad {
     this.previousPad.clear();
     this.previousPad.setData(segmentData);
     this.previousPad.draw();
-    this.previousPad.canvas.style.left = `${-1 * this.canvas.width * 0.9}px`;
+    this.previousPad.canvas.style.left = `${-1 * this.canvas.width * 0.99}px`;
   }
 
   createPreviousCanvas() {
-    let prevCanvas = this.canvas.cloneNode(true);
+    const prevCanvas = this.canvas.cloneNode(true);
     if (!prevCanvas.classList) {
       prevCanvas.className = "inactive";
     } else {
@@ -76,18 +76,13 @@ export default class WritingPad {
   draw() {
     this.canvasContext.beginPath();
     for (let i = 0; i < this.data.length; i++) {
-      let points = this.data[i].points || this.data[i];
+      const points = this.data[i].points || this.data[i];
       for (let j = 0; j < points.length; j++) {
-        let p = points[j];
+        const p = points[j];
         if (j === 0) {
           this.canvasContext.moveTo(p.x, p.y);
         } else {
           this.canvasContext.lineTo(p.x, p.y);
-        }
-        if (this.options.showCoords) {
-          this.canvasContext.fillStyle = "blue";
-          this.canvasContext.fillRect(p.x - 2, p.y - 2, 5, 5);
-          this.canvasContext.fillText(`(${p.x}. ${p.y})`, p.x + 10, p.y + 10);
         }
       }
     }
@@ -107,7 +102,7 @@ export default class WritingPad {
   }
 
   onmousedown(e) {
-    let pos = this._getXY(e);
+    const pos = this._getXY(e);
     this.lastPos = pos;
     this.points = [];
     this.isDown = true;
@@ -125,7 +120,7 @@ export default class WritingPad {
     if (!this.isDown) {
       return;
     }
-    let pos = this._getXY(e);
+    const pos = this._getXY(e);
     this.points.push(pos);
     this.canvasContext.beginPath();
     this.canvasContext.moveTo(this.lastPos.x, this.lastPos.y);

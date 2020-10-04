@@ -44,6 +44,13 @@ export default class Match {
         }
       }
     }
+
+    // If there is no match of multi strokes, try the last stroke
+    // This takes care of overlap of strokes
+    if (!candidates.length && strokes.length > 1) {
+      return this.run(strokes[strokes.length - 1]);
+    }
+
     // Sort by descending order of scores
     return candidates.sort(sortByScore);
   }

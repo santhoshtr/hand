@@ -51,7 +51,7 @@ export default class HandwritingRecognition {
       // Horizontal intersection
       return true;
     }
-    // We dont care vertical intersection?
+    // We do not care vertical intersection?
     return false;
   }
 
