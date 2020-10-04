@@ -85,7 +85,8 @@
         {
             "letter": "ഇ",
             "samples": [
-                "ഇ.svg"
+                "ഇ.svg",
+                "ഇ-2.svg"
             ]
         },
         {
@@ -550,6 +551,7 @@
             "letter": "ി",
             "samples": [
                 "ി.svg",
+                "ി-2.svg",
                 "7.svg"
             ]
         },
@@ -562,13 +564,15 @@
         {
             "letter": "ു",
             "samples": [
-                "ു.svg"
+                "ു.svg",
+                "ു-2.svg"
             ]
         },
         {
             "letter": "ൂ",
             "samples": [
-                "ൂ.svg"
+                "ൂ.svg",
+                "ൂ-2.svg"
             ]
         },
         {
