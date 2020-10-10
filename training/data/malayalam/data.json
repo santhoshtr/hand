@@ -292,9 +292,33 @@
             ]
         },
         {
+            "letter": "ത്ര",
+            "samples": [
+                "ത്ര.svg"
+            ]
+        },
+        {
+            "letter": "ത്സ",
+            "samples": [
+                "ത്സ.svg"
+            ]
+        },
+        {
+            "letter": "ത്മ",
+            "samples": [
+                "ത്മ.svg"
+            ]
+        },
+        {
             "letter": "ദ",
             "samples": [
                 "ദ.svg"
+            ]
+        },
+        {
+            "letter": "ദ്ധ",
+            "samples": [
+                "ദ്ധ.svg"
             ]
         },
         {
@@ -329,6 +353,12 @@
         },
         {
             "letter": "ന്ത",
+            "samples": [
+                "ന്ത.svg"
+            ]
+        },
+        {
+            "letter": "ന്തു",
             "samples": [
                 "ന്ത.svg"
             ]
@@ -449,6 +479,13 @@
             ]
         },
         {
+            "letter": "ല്ല",
+            "samples": [
+                "ല്ല.svg",
+                "ല്ല-reverse.svg"
+            ]
+        },
+        {
             "letter": "വ",
             "samples": [
                 "വ.svg"
@@ -465,6 +502,18 @@
             "letter": "സ",
             "samples": [
                 "സ.svg"
+            ]
+        },
+        {
+            "letter": "സ്സ",
+            "samples": [
+                "സ്സ.svg"
+            ]
+        },
+        {
+            "letter": "സ്ത്ര",
+            "samples": [
+                "സ്ത്ര.svg"
             ]
         },
         {
@@ -486,6 +535,12 @@
             ]
         },
         {
+            "letter": "ശ്ര",
+            "samples": [
+                "ശ്ര.svg"
+            ]
+        },
+        {
             "letter": "ഷ",
             "samples": [
                 "ഷ.svg",
@@ -499,6 +554,12 @@
             ]
         },
         {
+            "letter": "ഹൃ",
+            "samples": [
+                "ഹൃ.svg"
+            ]
+        },
+        {
             "letter": "ള",
             "samples": [
                 "ള.svg",
@@ -509,6 +570,12 @@
             "letter": "ൾ",
             "samples": [
                 "ള.svg"
+            ]
+        },
+        {
+            "letter": "ള്ള",
+            "samples": [
+                "ള്ള.svg"
             ]
         },
         {
