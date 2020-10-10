@@ -21,7 +21,7 @@ export default class Match {
   constructor(script, threshold) {
     this.scriptData = scriptData[script];
     this.threshold = threshold;
-    this.goodEnoughScore = 0.92;
+    this.goodEnoughScore = 0.96;
     this.maxRotationAngle = 0.5235988; // 30 degree in radians
   }
 
@@ -34,7 +34,7 @@ export default class Match {
 
     // Match each ligature data in the scriptData against the current drawn strokes
     for (let ligature in this.scriptData) {
-      let score = this.matchLigatue(strokes, ligature);
+      let score = this.matchLigature(strokes, ligature);
       if (score) {
         candidates.push({ pattern: ligature, score });
         // Good score. Stop here, ignore all other low score candidates.
@@ -61,7 +61,7 @@ export default class Match {
    * @param {string} ligature
    * @returns {number}
    */
-  matchLigatue(letterData, ligature) {
+  matchLigature(letterData, ligature) {
     const samples = this.scriptData[ligature].samples;
     // A ligature can be written in multiple ways. So the trained data
     // will have multiple samples.

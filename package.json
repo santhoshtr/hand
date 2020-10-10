@@ -61,7 +61,7 @@
   "license": "MIT",
   "mocha": {
     "recursive": true,
-    "timeout": 2000,
+    "timeout": 0,
     "require": "@babel/register"
   },
   "repository": {

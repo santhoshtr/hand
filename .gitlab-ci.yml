@@ -1,9 +1,9 @@
-# test:
-#   image: node:latest
-#   stage: test
-#   script:
-#     - npm ci
-#     - npm test
+test:
+  image: node:latest
+  stage: test
+  script:
+    - npm ci
+    - npm test
 
 pages: # the job must be named pages
   image: node:latest
