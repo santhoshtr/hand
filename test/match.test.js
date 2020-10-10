@@ -30,9 +30,8 @@ describe("Match", () => {
         let candidates = matcher.run(sample.strokes);
         assert.ok(candidates.length > 0);
         assert.ok(candidates[0].score > threshold);
-        if (candidates[0].pattern !== ligature) {
-          console.log(candidates);
-        }
+
+        console.log(ligature, candidates);
         if (
           ligature === "ഠ" ||
           ligature === "ം" ||

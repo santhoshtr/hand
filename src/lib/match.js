@@ -23,6 +23,7 @@ export default class Match {
     this.threshold = threshold;
     this.goodEnoughScore = 0.96;
     this.maxRotationAngle = 0.5235988; // 30 degree in radians
+    this.debug = false;
   }
 
   run(strokes) {
@@ -73,7 +74,7 @@ export default class Match {
       }
       let strokeScores = [];
       const matching = letterData.every((stroke, index) => {
-        console.debug(`Trying: ${ligature}`);
+        this.debug && console.debug(`Trying: ${ligature}`);
         const score = this.matchPaths(stroke, sample.strokes[index]);
         if (score >= this.threshold) {
           strokeScores.push(score);
@@ -90,7 +91,7 @@ export default class Match {
   }
 
   /**
-   * Match the drawn path to a candidate path of leaned patterns
+   * Match the drawn path to a candidate path of learned patterns
    *
    * @param {import("curve-matcher").Point[]} path
    * @param {import("curve-matcher").Point[]} candidatePath
@@ -100,21 +101,17 @@ export default class Match {
     const tolerance = 5;
     const highQuality = true;
 
-    // Simplify both paths
+    // Simplify path. candidatePath is already simplified during training
     const simplifiedPath = simplify(path, tolerance, highQuality);
-    const simplifiedCandidatePath = simplify(
-      candidatePath,
-      tolerance,
-      highQuality
-    );
 
-    console.debug(
-      `Compare\n ${pathToStr(simplifiedPath)} (length: ${curveLength(
-        simplifiedPath
-      )})\n ${pathToStr(simplifiedCandidatePath)} (length: ${curveLength(
-        simplifiedCandidatePath
-      )}) `
-    );
+    this.debug &&
+      console.debug(
+        `Compare\n ${pathToStr(simplifiedPath)} (length: ${curveLength(
+          simplifiedPath
+        )})\n ${pathToStr(candidatePath)} (length: ${curveLength(
+          candidatePath
+        )}) `
+      );
 
     const estimationPoints = candidatePath.length > 50 ? 100 : 50;
     // Internally, shapeSimilarity works by first normalizing the curves
@@ -128,15 +125,11 @@ export default class Match {
     // sometimes doesn't choose the best rotation if curves are not that similar to each other,
     // ShapeSimilarity also tries 10 (by default) equally spaced rotations to make sure it
     // picks the best possible rotation normalization.
-    const similarityScore = shapeSimilarity(
-      simplifiedPath,
-      simplifiedCandidatePath,
-      {
-        restrictRotationAngle: this.maxRotationAngle,
-        estimationPoints: estimationPoints
-      }
-    );
-    console.debug(`score: ${similarityScore}`);
+    const similarityScore = shapeSimilarity(simplifiedPath, candidatePath, {
+      restrictRotationAngle: this.maxRotationAngle,
+      estimationPoints: estimationPoints
+    });
+    this.debug && console.debug(`score: ${similarityScore}`);
     return similarityScore;
   }
 }
