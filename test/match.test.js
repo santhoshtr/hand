@@ -32,24 +32,26 @@ describe("Match", () => {
         assert.ok(candidates[0].score > threshold);
 
         console.log(ligature, candidates);
-        if (
-          ligature === "ഠ" ||
-          ligature === "ം" ||
-          ligature === "o" ||
-          ligature === "O" ||
-          ligature === "I" ||
-          ligature === "l" ||
-          ligature === "|" ||
-          ligature === "/" ||
-          ligature === "\\" ||
-          ligature === "i" ||
-          ligature === "s" ||
-          ligature === "S" ||
-          ligature === "z" ||
-          ligature === "Z" ||
-          ligature === "(" ||
-          ligature === "ി"
-        ) {
+        const confusables = [
+          "ഠ",
+          "ം",
+          "o",
+          "O",
+          "I",
+          "l",
+          "|",
+          "/",
+          "\\",
+          "i",
+          "s",
+          "S",
+          "z",
+          "Z",
+          "(",
+          "ി"
+        ];
+
+        if (confusables.includes(ligature)) {
           // These are very much similar and need postprocessing to differentiate.
           continue;
         }

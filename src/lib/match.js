@@ -39,7 +39,7 @@ export default class Match {
       if (score) {
         candidates.push({ pattern: ligature, score });
         // Good score. Stop here, ignore all other low score candidates.
-        if (score > this.goodEnoughScore) {
+        if (score >= this.goodEnoughScore) {
           candidates = [{ pattern: ligature, score }];
           break;
         }

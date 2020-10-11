@@ -74,7 +74,7 @@ def main(options):
         for sample_file_name in letter["samples"]:
             sample_file = os.path.join(training_data_dir, sample_file_name)
             strokes = extract_strokes(sample_file)
-            simplifiedStrokes = [simplify.simplify(stroke, 5, True) for stroke in strokes]
+            simplifiedStrokes = [simplify.simplify(stroke, 3, True) for stroke in strokes]
             # print("\t%s" % (sample_file_name))
             samples.append({"strokes": simplifiedStrokes})
         result[letter["letter"]] = {"samples": samples}
